@@ -6,7 +6,7 @@ import {
 } from '../store/actions/AuthActions';
 
 export function signUp(email, password) {
-    //axios call
+    // axios call
 
     const postData = {
         email,

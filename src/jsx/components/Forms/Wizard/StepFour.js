@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "react-router-dom";
 //import Rte from "../Summernote/Rte";
 //import { Link } from "react-router-dom";
 //import Summernote from "../Summernote/SummerNote";
@@ -61,7 +62,12 @@ async function onSignUp(e) {
     Link,
     Desc,
   });
-  console.log("HEREPLEASE")
+  console.log("HEREPLEASE");
+  // const history=
+  // location.replace("http://localhost:3000/react/demo/login");
+  // history.back();
+  window.location.replace("http://localhost:3000/react/demo/review")
+
 }
 console.log("Reached");
 
