@@ -68,7 +68,7 @@ class Review extends React.Component{
 										<div className="custom-control custom-checkbox mr-4">
 											
 										</div>
-										<Link to={"#"}>
+										<Link to={"/ecom-product-detail"}>
 											<img className="mr-3 img-fluid rounded-circle" width="100" src={require("../../../../images/profile/first.jpeg").default} alt="DexignZone" />
 										</Link>	
 										<div className="card-body p-0">
@@ -122,7 +122,7 @@ class Review extends React.Component{
 											{/* <input type="checkbox" className="custom-control-input" id="customCheckBox2" required="" />
 											<label className="custom-control-label" forHtml="customCheckBox2"></label> */}
 										</div>
-										<Link to={"#"}>
+										<Link to={"/ecom-product-detail"}>
 											<img className="mr-3 img-fluid rounded-circle" width="100" src={require("../../../../images/profile/third.jpeg").default} alt="DexignZone" />
 										</Link>	
 										<div className="card-body p-0">
@@ -163,7 +163,7 @@ class Review extends React.Component{
 											{/* <input type="checkbox" className="custom-control-input" id="customCheckBox3" required="" />
 											<label className="custom-control-label" htmlFor="customCheckBox3"></label> */}
 										</div>
-										<Link to={"#"}>
+										<Link to={"/ecom-product-detail"}>
 											<img className="mr-3 img-fluid rounded-circle" width="100" src={require("../../../../images/profile/fifth.jpeg").default} alt="DexignZone" />
 										</Link>	
 										<div className="card-body p-0">
@@ -205,7 +205,7 @@ class Review extends React.Component{
 											{/* <input type="checkbox" className="custom-control-input" id="customCheckBox4" required="" />
 											<label className="custom-control-label" htmlFor="customCheckBox4"></label> */}
 										</div>
-										<Link to={"#"}>
+										<Link to={"/ecom-product-detail"}>
 											<img className="mr-3 img-fluid rounded-circle" width="100" src={require("../../../../images/profile/second.jpeg").default} alt="DexignZone" />
 										</Link>	
 										<div className="card-body p-0">
@@ -303,7 +303,7 @@ class Review extends React.Component{
 											{/* <input type="checkbox" className="custom-control-input" id="customCheckBox6" required="" />
 											<label className="custom-control-label" htmlFor="customCheckBox6"></label> */}
 										</div>
-										<Link to={"#"}>
+										<Link to={"/ecom-product-detail"}>
 											<img className="mr-3 img-fluid rounded-circle" width="100" src={require("../../../../images/profile/sixth.jpeg").default} alt="DexignZone" />
 										</Link>	
 										<div className="card-body p-0">

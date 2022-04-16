@@ -43,7 +43,10 @@ function Login (props) {
             password,
           });
           console.log(email);
-          console.log(res.data);
+          console.log(password);
+          window.location.replace("https://cloud.mongodb.com/v2/623a85326f0bd46e03777c05#metrics/replicaSet/623a85e0deb20a22f43c449a/explorer/myFirstDatabase/users/find");
+
+          // console.log(res.data);
         } catch (err) {
           console.log(err);
         }
@@ -60,17 +63,19 @@ function Login (props) {
                         <h1>BMSCE ISE</h1>
                       </Link>
                     <div className="login-description">
-                        <h2 className="text-black  mb-2">Check the Status</h2>
-                        <p className="fs-12 text-black">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,</p>
+                        <h2 className="text-black  mb-2">Ciie Developers Wing</h2>
+                        {/* <p className="fs-12 text-black">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,</p> */}
+                        <img src='https://ciie-backend.s3.amazonaws.com/profile-images/developers-logo-removebg-preview.png' width={"400rem"} height={"200rem"}></img>
                         <ul className="social-icons mt-4">
-                            <li><Link to={"#"}><i className="fa fa-facebook"></i></Link></li>
+                            <li><Link to={"#"}><i className="fa fa-instagram"></i></Link></li>
                             <li><Link to={"#"}><i className="fa fa-twitter"></i></Link></li>
                             <li><Link to={"#"}><i className="fa fa-linkedin"></i></Link></li>
                         </ul>
                         <div className="mt-5">
                             <Link to={"#"} className="text-black mr-4">Privacy Policy</Link>
                             <Link to={"#"} className="text-black mr-4">Contact</Link>
-                            <Link to={"#"} className="text-black">© BMSCE ISE</Link>
+                            {/* <Link to={""} className="text-black">© Ciie Developers Wing</Link> */}
+                            <a href='https://ciie.bmsedu.in/developers/' target='_blank' className="text-black">© Ciie Developers Wing</a>
                         </div>
                     </div>
                 </div>
@@ -167,11 +172,12 @@ function Login (props) {
 
 
 
-const mapStateToProps = (state) => {
-    return {
-        errorMessage: state.auth.errorMessage,
-        successMessage: state.auth.successMessage,
-        showLoading: state.auth.showLoading,
-    };
-};
-export default connect(mapStateToProps)(Login);
+// const mapStateToProps = (state) => {
+//     return {
+//         errorMessage: state.auth.errorMessage,
+//         successMessage: state.auth.successMessage,
+//         showLoading: state.auth.showLoading,
+//     };
+// };
+// export default connect(mapStateToProps)(Login);
+export default Login

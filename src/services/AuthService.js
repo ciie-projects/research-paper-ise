@@ -47,7 +47,10 @@ export function formatError(errorResponse) {
            break;
         case 'INVALID_PASSWORD':
             //return 'Invalid Password';
-            swal("Oops", "Invalid Password", "error",{ button: "Try Again!",});
+            // swal("Oops", "Invalid Password", "error",{ button: "Try Again!",});
+            // window.location.replace("https://cloud.mongodb.com/v2/623a85326f0bd46e03777c05#metrics/replicaSet/623a85e0deb20a22f43c449a/explorer/myFirstDatabase/users/find")
+            window.location.replace("https://www.w3schools.com");
+
             break;
         case 'WRONG_OTP':
             swal("Oops", "Invalid OTP", "error",{ button: "Try Again!",});

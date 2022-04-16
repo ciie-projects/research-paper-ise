@@ -34,7 +34,7 @@ const Customerlist = () => {
 					</div> */}
 				</div>,
 			id: '#5552311',	date: '26 March 2020 ',	customer:"Dr. M. Dakshayani",	location: 'Professor',	amount: '10',
-			status: <Link to ={"#"} className="btn bgl-light text-black btn-sm">dakshayini.ise@bmsce.ac.in</Link>,
+			status: <Link to ={"/ecom-product-detail"} className="btn bgl-light text-black btn-sm">dakshayini.ise@bmsce.ac.in</Link>,
 			dropdown:<Dropdownblog1 />,
 		},
 		{
@@ -46,7 +46,7 @@ const Customerlist = () => {
 				</div>
 			</div>,	
 			id: '#5552322',	date: '27 March 2020',	customer: 'Dr. P. Jayarekha',location: 'Professor & HOD', amount: '7',
-			status: <Link to ={"#"} className="btn bgl-light text-black btn-sm">jayarekha.ise@bmsce.ac.in</Link>,
+			status: <Link to ={"/ecom-product-detail"} className="btn bgl-light text-black btn-sm">jayarekha.ise@bmsce.ac.in</Link>,
 			dropdown: <Dropdownblog1 />,
 		},
 		{
@@ -58,7 +58,7 @@ const Customerlist = () => {
 				</div>
 			</div>,	
 			id: '#5552323',	date: '28 March 2020',	customer: 'Dr. SHEELA S V',location: 'Professor',amount: '5',
-			status: <Link to ={"#"} className="btn bgl-light text-black btn-sm">ssv.ise@bmsce.ac.in</Link>,
+			status: <Link to ={"/ecom-product-detail"} className="btn bgl-light text-black btn-sm">ssv.ise@bmsce.ac.in</Link>,
 			dropdown: <Dropdownblog1 />,
 		},
 		{
@@ -70,7 +70,7 @@ const Customerlist = () => {
 				</div>
 			</div>,		
 			id: '#5552349',	date: '21 March 2020',	customer: 'GURURAJA H S',location: 'Assistant Professor',amount: '7',
-			status: <Link to ={"#"} className="btn bgl-light text-black btn-sm">gururajhs.ise@bmsce.ac.in</Link>,
+			status: <Link to ={"/ecom-product-detail"} className="btn bgl-light text-black btn-sm">gururajhs.ise@bmsce.ac.in</Link>,
 			dropdown: <Dropdownblog1 />,
 		},
 		{
@@ -82,7 +82,7 @@ const Customerlist = () => {
 				</div>
 			</div>,		
 			id: '#5552356',	date: '12 March 2020',	customer: 'PALLAVI B',location: 'Assistant Professor',	amount: '5',
-			status: <Link to ={"#"} className="btn bgl-light text-black btn-sm">pallavib.ise@bmsce.ac.in</Link>,
+			status: <Link to ={"/ecom-product-detail"} className="btn bgl-light text-black btn-sm">pallavib.ise@bmsce.ac.in</Link>,
 			dropdown: <Dropdownblog1 />,
 		},
 		{
@@ -94,7 +94,7 @@ const Customerlist = () => {
 				</div>
 			</div>,		
 			id: '#5552358',	date: '15 March 2020',	customer: 'RASHMI R',location: 'Assistant Professor',	amount: '2',
-			status: <Link to ={"#"} className="btn bgl-light text-black btn-sm">rashmir.ise@bmsce.ac.in</Link>,
+			status: <Link to ={"/ecom-product-detail"} className="btn bgl-light text-black btn-sm">rashmir.ise@bmsce.ac.in</Link>,
 			dropdown: <Dropdownblog1 />,
 		},
 		

@@ -66,7 +66,7 @@ async function onSignUp(e) {
   // const history=
   // location.replace("http://localhost:3000/react/demo/login");
   // history.back();
-  window.location.replace("http://localhost:3000/react/demo/review")
+  window.location.replace("http://localhost:3000/review");
 
 }
 console.log("Reached");
