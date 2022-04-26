@@ -2,12 +2,10 @@ version: 0.2
 
 phases:
   install:
-    runtime-versions:
-      nodejs: 12
     commands:
-        - installing yarn...
-        - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-        - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+        - echo Installing node...
+        - curl -fsSL https://deb.nodesource.com/setup_18.x | -E bash -
+        - apt install -y nodejs
 
         - installing npm...
         - npm install
