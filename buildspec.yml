@@ -1,0 +1,36 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+    commands:
+        - installing yarn...
+        - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+        - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+
+        - installing npm...
+        - npm install
+       
+  pre-build:
+    commands: 
+      - echo Installing dependencies...
+      - npm install
+
+  build:
+    commands:
+        - echo Testing...
+        - npm react-scripts test
+        - echo building packages...
+        - npm run-script build
+
+     
+artifacts:
+  # include all files required to run application
+  # notably excluded is node_modules, as this will cause overwrite error on deploy
+  files:
+    - public/**/*
+    - src/**/*
+    - package.json
+    - buildspec.yml
+    - scripts/**/*
