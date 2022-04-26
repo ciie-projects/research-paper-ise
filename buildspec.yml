@@ -12,10 +12,11 @@ phases:
 
   build:
     commands:
+        - npm install run-scripts
         - echo Testing...
         - npm react-scripts test
         - echo building packages...
-        - npm run-script build
+        - npm run-scripts build
 
      
 artifacts:
