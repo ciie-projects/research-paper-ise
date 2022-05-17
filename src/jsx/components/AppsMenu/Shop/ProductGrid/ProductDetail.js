@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Modal, Nav, Tab } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link,useLocation } from "react-router-dom";
+
 import {
 	Row,
 	Col,
@@ -11,74 +12,76 @@ import {
 	ProgressBar,
   } from "react-bootstrap";
 import PageTitle from "../../../../layouts/PageTitle";
-
+import {useAuth0} from "@auth0/auth0-react";
+import axios from "axios";
+import { useEffect } from "react";
 
 const ProductDetail = () => {
+  const location=useLocation();
+  const path= location.pathname.split("/")[2];
+  console.log(path);
+  const {user,isAuthenticated,isLoading}=useAuth0();
+  const [info,setinfo]=useState({});
   const [reviewToggle, setReviewToggle] = useState(false);
   const [activeTab, setActiveTab] = useState('0');
+  useEffect(()=>{
 
+    const fetchData = async () => {
+      try {
+        const res=await axios.get(`/api/profiles/${isAuthenticated && path}`);
+        console.log(res.data);
+        setinfo(res.data);
+        
+    
+      } catch (error) {
+         console.log(error);
+      }
+      };
+    
+    console.log(info);
+       
+    
+    
+       fetchData();
+    })
+	
+	console.log(info);
     const toggle = tab => {
         if (activeTab !== tab) setActiveTab(tab);
     }
   return (
     <>
-      <PageTitle motherMenu="Profile" activeMenu="Rashmi R" />
+      <PageTitle motherMenu="Profile" activeMenu={isAuthenticated && info.username} />
       <div className="row">
         <div className="col-lg-12">
           <div className="card">
             <div className="card-body">
               <div className="row">
 					<div className="col-xl-3 col-lg-6  col-md-6 col-xxl-5 ">
-					  {/* Tab panes */}
+					 
 						<Tab.Container defaultActiveKey="first">
-							{/* <Tab.Content>
-								<Tab.Pane eventKey="first">
-									<img className="img-fluid" src="./../../../../images/card/fifth.jpeg" alt="" />
-								</Tab.Pane>
-								<Tab.Pane eventKey="second">
-									<img className="img-fluid" src="./../../../../images/card/fifth.jpeg" alt="" />
-								</Tab.Pane>
-								<Tab.Pane eventKey="third">
-									<img className="img-fluid" src="./../../../../images/card/fifth.jpeg"    alt="" />
-								</Tab.Pane>
-								<Tab.Pane eventKey="four">
-									<img className="img-fluid" src="./../../../../images/card/fifth.jpeg" alt="" />
-								</Tab.Pane>
-							</Tab.Content> */}
+							
 							<div className="tab-slide-content new-arrival-product mb-4 mb-xl-0">
 							  {/* Nav tabs */}
 								<Nav as="ul" className="nav slide-item-list mt-3" role="tablist">
-									 {/* <Nav.Item as="li">
-										<Nav.Link as="a" eventKey="first" to="#first">
-											<img className="img-fluid" src={tab1} alt=""width={50} />
-										</Nav.Link>
-									</Nav.Item> */}
+									 
 									<Nav.Item as="li">
 										<Nav.Link as="a" eventKey="second" to="#second">
-											<img className="img-fluid" src="https://ciie-backend.s3.amazonaws.com/profile-images/fifth.jpeg" alt="" width={50}/>
+											<img className="img-fluid" src={isAuthenticated && info.pic} alt="" width={50}/>
 										</Nav.Link>
 									</Nav.Item>
-									{/* <Nav.Item as="li">
-										<Nav.Link as="a" eventKey="third" to="#third">
-											<img  className="img-fluid" src={tab3} alt="" width={50}/>
-										</Nav.Link>
-									</Nav.Item>
-									<Nav.Item as="li">
-										<Nav.Link as="a" to="#for" eventKey="four">
-											<img  className="img-fluid" src={tab4} alt="" width={50}/>
-										</Nav.Link> */}
-									{/* </Nav.Item>  */}
+								
 								</Nav>
 							</div>
 						</Tab.Container>
 					</div>
-                {/*Tab slider End*/}
+              
 
                 <div className="col-xl-9 col-lg-6  col-md-6 col-xxl-7 col-sm-12">
                   <div className="product-detail-content">
-                    {/*Product details*/}
+               
                     <div className="new-arrival-content pr">
-                      <h4>Rashmi R</h4>
+                      <h4>{isAuthenticated && info.username}</h4>
 						<div className="comment-review star-rating">
 							<ul>
 								<li className="star" title="Poor" data-value={1}>
@@ -97,26 +100,21 @@ const ProductDetail = () => {
 									<i className="fa fa-star fa-fw" />
 								</li>
 							</ul>
-							<span className="review-text">(5 years experience)  </span>
+							<span className="review-text">({info.experience } years of experience)  </span>
 						</div>
 						{/* <div className="d-table mb-2">
 							<p className="price float-left d-block">$325.00</p>
 						</div> */}
-						<p>Email id:{" "}<span className="item"> {" "}rashmi.is20@bmsce.ac.in </span></p>
-						<p>Designation: <span className="item">Assitant proffesor</span>{" "}</p>
+						<p>Email id:{" "}<span className="item"> {" "}{isAuthenticated && info.email} </span></p>
+						<p>Designation: <span className="item"></span>{isAuthenticated && info.desgination}</p>
 						<p>
 							Research Interests:&nbsp;&nbsp;
-							<span className="badge badge-success light mr-1">AI and ML</span>
-							<span className="badge badge-success light mr-1">Networking</span>
-							<span className="badge badge-success light mr-1">Big Data</span>
+							<span className="badge badge-success light mr-1">{isAuthenticated && info.researchInt}</span>
+							<span className="badge badge-success light mr-1">{isAuthenticated && info.researchInt}</span>
+							<span className="badge badge-success light mr-1">{isAuthenticated && info.researchInt}</span>
 						</p>
 						<p className="text-content">
-							There are many variations of passages of Lorem Ipsum
-							available, but the majority have suffered alteration in
-							some form, by injected humour, or randomised words which
-							don't look even slightly believable. If you are going to
-							use a passage of Lorem Ipsum, you need to be sure there
-							isn't anything embarrassing.
+						{isAuthenticated && info.aboutme}
 						</p>
                     </div>
                   </div>
@@ -126,81 +124,7 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
-	  <Col lg={12}>
-          <Card>
-            <Card.Header>
-              <Card.Title>Submissions</Card.Title>
-            </Card.Header>
-            <Card.Body>
-              <Table responsive className="header-border ">
-                <thead>
-                  <tr>
-                    
-                    <th>Publication Type</th>
-					<th>Title</th>
-                    <th>Link for the publication</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      Journal
-                    </td>
-                    <td>intro to AI</td>
-                    <td>
-					<a href="https://ciie-backend.s3.amazonaws.com/Shashank+MHello.pdf">https://ciie-backend.s3.amazonaws.com/Shashank+MHello.pdf</a>
-                    </td>
-                    <td>
-                      <Badge variant="success">Approved</Badge>
-                    </td>
-                    
-                  </tr>
-				  <tr>
-                    <td>
-                      Journal
-                    </td>
-                    <td>intro to AI</td>
-                    <td>
-					<a href="https://ciie-backend.s3.amazonaws.com/Shashank+MHello.pdf">https://ciie-backend.s3.amazonaws.com/Shashank+MHello.pdf</a>
-                    </td>
-                    <td>
-                      <Badge variant="success">Approved</Badge>
-                    </td>
-                    
-                  </tr>
-				  <tr>
-                    <td>
-                      Journal
-                    </td>
-                    <td>intro to AI</td>
-                    <td>
-					<a href="https://ciie-backend.s3.amazonaws.com/Shashank+MHello.pdf">https://ciie-backend.s3.amazonaws.com/Shashank+MHello.pdf</a>
-                    </td>
-                    <td>
-                      <Badge variant="success">Approved</Badge>
-                    </td>
-                    
-                  </tr>
-				  <tr>
-                    <td>
-                      Journal
-                    </td>
-                    <td>intro to AI</td>
-                    <td>
-					<a href="https://ciie-backend.s3.amazonaws.com/Shashank+MHello.pdf">https://ciie-backend.s3.amazonaws.com/Shashank+MHello.pdf</a>
-                    </td>
-                    <td>
-                      <Badge variant="success">Approved</Badge>
-                    </td>
-                    
-                  </tr>
-              
-                </tbody>
-              </Table>
-            </Card.Body>
-          </Card>
-        </Col>
+	
 		<Col lg={12}>
           <Card>
             <Card.Header>
@@ -213,7 +137,7 @@ const ProductDetail = () => {
                     <th scope="col">#</th>
                     <th scope="col">Title</th>
                     <th scope="col">Link for the Publication</th>
-                    <th scope="col">Status</th>
+                
                   </tr>
                 </thead>
                 <tbody>
@@ -223,9 +147,7 @@ const ProductDetail = () => {
                     <td>
                       <a href="https://ciie-backend.s3.amazonaws.com/Shashank+MHello.pdf">https://ciie-backend.s3.amazonaws.com/Shashank+MHello.pdf</a>
                     </td>
-                    <td>
-                      <Badge variant="success">Approved</Badge>
-                    </td>
+                    
                   </tr>
 				  <tr>
                     <th>2</th>
@@ -233,9 +155,7 @@ const ProductDetail = () => {
                     <td>
                       <a href="https://ciie-backend.s3.amazonaws.com/Shashank+MHello.pdf">https://ciie-backend.s3.amazonaws.com/Shashank+MHello.pdf</a>
                     </td>
-                    <td>
-                      <Badge variant="primary light">Pending</Badge>
-                    </td>
+
                   </tr>
 				  <tr>
                     <th>3</th>
@@ -243,9 +163,7 @@ const ProductDetail = () => {
                     <td>
                       <a href="https://ciie-backend.s3.amazonaws.com/Shashank+MHello.pdf">https://ciie-backend.s3.amazonaws.com/Shashank+MHello.pdf</a>
                     </td>
-                    <td>
-                      <Badge variant="success">Approved</Badge>
-                    </td>
+                    
                   </tr>
               
                 </tbody>

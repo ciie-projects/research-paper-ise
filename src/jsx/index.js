@@ -5,7 +5,7 @@ import {Switch, Route } from 'react-router-dom'
 import './index.css'
 import './chart.css'
 import './step.css'
-
+import {useAuth0} from "@auth0/auth0-react";
 /// Layout
 import Nav from './layouts/nav'
 import Footer from './layouts/Footer'
@@ -108,6 +108,7 @@ import ScrollToTop from './layouts/ScrollToTop';
 
 
 const Markup = () => {
+  const {user,isAuthenticated,isLoading}=useAuth0();
   let path = window.location.pathname
   path = path.split('/')
   path = path[path.length - 1]
@@ -116,14 +117,14 @@ const Markup = () => {
 
   const routes = [
     /// Dashboard
-    { url: "", component: Home },
+    { url: "", component:Login },
     { url: "dashboard", component: Home },
 	{ url: "companies", component: Companies },
 	{ url: "analytics", component: Analytics },
-	{ url: "review", component: Review },
+	{ url: "faculty", component:isAuthenticated? Review:Login},
 	{ url: "order", component: Order },
 	{ url: "order-list", component: Orderlist },
-	{ url: "customer-list", component: Customerlist },
+	{ url: "faculty-list", component:isAuthenticated?Customerlist:Login},
 	{ url: 'task', component: Task },
 
     /// Apps
@@ -177,11 +178,11 @@ const Markup = () => {
     /// Shop
     { url: 'ecom-product-grid', component: ProductGrid },
     { url: 'ecom-product-list', component: ProductList },
-    { url: 'ecom-product-detail', component: ProductDetail },
+    { url: 'faculty/:email', component:isAuthenticated? ProductDetail:Login},
     { url: 'ecom-product-order', component: ProductOrder },
     { url: 'ecom-checkout', component: Checkout },
     { url: 'ecom-invoice', component: Invoice },
-    { url: 'ecom-product-detail', component: ProductDetail },
+    // { url: 'ecom-product-detail', component: ProductDetail },
     { url: 'ecom-customers', component: EcomCustomers },
 
     /// Form
@@ -189,8 +190,8 @@ const Markup = () => {
     { url: 'form-redux', component: ReduxForm },
     { url: 'form-redux-wizard', component: WizardForm },
     { url: 'form-element', component: Element },
-    { url: 'form-wizard', component: Wizard },
-    { url: 'form-wizard', component: Wizard },
+    // { url: 'form-wizard', component: Wizard },
+    { url: 'publish', component:isAuthenticated? Wizard:Login },
     { url: 'form-editor-summernote', component: SummerNote },
     { url: 'form-pickers', component: Pickers },
     { url: 'form-validation-jquery', component: jQueryValidation },
@@ -216,8 +217,8 @@ const Markup = () => {
   return (
        <> 
           <div
-            id={`${!pagePath ? 'main-wrapper' : ''}`}
-            className={`${!pagePath ? 'show' : 'mh100vh'}`}
+            id={`${!pagePath? 'main-wrapper' : ''}`}
+            className={`${!pagePath  ? 'show' : 'mh100vh'}`}
           >
             {!pagePath && (
               <Nav
@@ -236,7 +237,7 @@ const Markup = () => {
                 className={`${!pagePath ? 'container-fluid' : ''}`}
                 style={{ minHeight: window.screen.height - 60 }}
               >
-                <Switch>
+              <Switch>
                   {routes.map((data, i) => (
                     <Route
                       key={i}
@@ -245,7 +246,7 @@ const Markup = () => {
                       component={data.component}
                     />
                   ))}
-                </Switch>
+              </Switch>
               </div>
             </div>
             {!pagePath && <Footer />}

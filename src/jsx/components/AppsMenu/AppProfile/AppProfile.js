@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Button, Dropdown, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -16,16 +16,18 @@ import profile08 from "../../../../images/profile/8.jpg";
 import profile09 from "../../../../images/profile/9.jpg";
 import profile from "../../../../images/profile/profile.png";
 import PageTitle from "../../../layouts/PageTitle";
+import {useAuth0} from "@auth0/auth0-react";
 
-
-var json;
 const AppProfile = () => {
+
+
+	const {user,isAuthenticated,isLoading}=useAuth0();
   const [activeToggle, setActiveToggle] = useState("posts");
   const [sendMessage, setSendMessage] = useState(false);
   const [postModal, setPostModal] = useState(false);
   const [cameraModal, setCameraModal] = useState(false);
   const [linkModal, setLinkModal] = useState(false);
-
+  const [file,setfile]=useState(null);
   const [replayModal, setReplayModal] = useState(false);
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
@@ -33,9 +35,12 @@ const AppProfile = () => {
   const [researchInt, setresearchInt] = useState("");
   const [desgination, setdesignation] = useState("");
   const [experience, setexperience] = useState("");
+  const [username,setusername]=useState("");
   const [userData , setuserData] = useState("");
   const history = useHistory();
- 
+  const [info,setinfo]=useState("");
+
+console.log("profile"+isAuthenticated);
   async function onSave(e){
     e.preventDefault();
    
@@ -46,36 +51,58 @@ const AppProfile = () => {
 		  aboutme,
           researchInt,
 		  desgination,
-		  experience
+		  experience,
+		  username
 		});
+		if(file){
+			// const data=new FormData();
+			// console.log(data);
+			const data=Date.now()+file.name;
+			data.append("name",data);
+            data.append("file",file);
+				console.log(data);
+			try{
+              
+                await axios.post(`/api/profiles/${isAuthenticated && user.email}`,data);
+        
+        
+            }
+			catch(err){
+             console.log(err);
+            }
+		}
 		console.log(res.data);
-	  } catch (err) {
+		window.location.replace("http://localhost:3000/faculty");
+	  }
+	   catch (err) {
 		console.log(err);
 	  }
+
   }
-  console.log("HEre");
-  console.log(email);
-
-
-  const fetchData = async () => {
-	try {
-	  const response = await fetch("/api/profiles/");
-	  json = await response.json();
-
-	  console.log("Inside");
-	  console.log(json);
-
-	} catch (error) {
-	  console.log("error", error);
-	}
-  };
-
-   console.log("REached after");
-   
-   console.log("read");
-
  
-   fetchData();
+  useEffect(()=>{
+
+	const fetchData = async () => {
+		try {
+			const res=await axios.get(`/api/profiles/${isAuthenticated && user.email}`);
+			console.log(res.data);
+		    setinfo(res.data);
+			
+	
+		} catch (error) {
+		   console.log(error);
+		}
+	  };
+	
+	console.log(info);
+	   
+	
+	
+	   fetchData();
+  })
+
+
+
 
   return (
     <Fragment>
@@ -92,18 +119,18 @@ const AppProfile = () => {
               <div className="profile-info">
                 <div className="profile-photo">
                   <img
-                    src="https://ciie-backend.s3.amazonaws.com/profile-images/fifth.jpeg"
+                    src={isAuthenticated && info.pic}
                     className="img-fluid rounded-circle"
                     alt="profile"
                   />
                 </div>
                 <div className="profile-details">
                   <div className="profile-name px-3 pt-2">
-                    <h4 className="text-primary mb-0">Rashmi R</h4>
-                    <p>Assistant Professor</p>
+                    <h4 className="text-primary mb-0">{isAuthenticated && info.username}</h4>
+                    <p>{isAuthenticated && info.desgination}</p>
                   </div>
                   <div className="profile-email px-2 pt-2">
-                    <h4 className="text-muted mb-0">rashmi@bmsce.ac.in</h4>
+                    <h4 className="text-muted mb-0">{isAuthenticated && info.email}</h4>
                     <p>Email</p>
                   </div>
                   
@@ -140,24 +167,12 @@ const AppProfile = () => {
 								<div className="pt-4 border-bottom-1 pb-3">
 									<h4 className="text-primary">About Me</h4>
 									<p className="mb-2">
-										A wonderful serenity has taken possession of my
-										entire soul, like these sweet mornings of spring
-										which I enjoy with my whole heart. I am alone, and
-										feel the charm of existence was created for the
-										bliss of souls like mine.I am so happy, my dear
-										friend, so absorbed in the exquisite sense of mere
-										tranquil existence, that I neglect my talents.
+										{isAuthenticated && info.aboutme}
 									</p>
-									<p>
-										A collection of textile samples lay spread out on
-										the table - Samsa was a travelling salesman - and
-										above it there hung a picture that he had recently
-										cut out of an illustrated magazine and housed in a
-										nice, gilded frame.
-									</p>
+									
 								</div>
 							</div>
-							<div className="profile-skills mb-5">
+							{/* <div className="profile-skills mb-5">
 								<h4 className="text-primary mb-2">Skills</h4>
 								<Link to="/app-profile" className="btn btn-primary light btn-xs mb-1 mr-1"> Admin</Link>
 								<Link to="/app-profile" className="btn btn-primary light btn-xs mb-1 mr-1" > Dashboard</Link>
@@ -165,18 +180,18 @@ const AppProfile = () => {
 								<Link to="/app-profile" className="btn btn-primary light btn-xs mb-1 mr-1">Bootstrap</Link>
 								<Link to="/app-profile" className="btn btn-primary light btn-xs mb-1 mr-1">Responsive</Link>
 								<Link to="/app-profile" className="btn btn-primary light btn-xs mb-1 mr-1">Crypto</Link>
-							</div>
+							</div> */}
 							<div className="profile-lang  mb-5">
 								<h4 className="text-primary mb-2">Research Interest</h4>
 								<Link to="/app-profile" className="text-muted pr-3 f-s-16">
-									<i className="flag-icon flag-icon-us" />AI and ML
+									<i className="flag-icon flag-icon-us" />{isAuthenticated && info.researchInt}
 								</Link>
-								<Link to="/app-profile" className="text-muted pr-3 f-s-16">
+								{/* <Link to="/app-profile" className="text-muted pr-3 f-s-16">
 									<i className="flag-icon flag-icon-fr" />Python
 								</Link>
 								<Link to="/app-profile" className="text-muted pr-3 f-s-16">
 									<i className="flag-icon flag-icon-bd" />Networking
-								</Link>
+								</Link> */}
 							</div>
 							<div className="profile-personal-info">
 								<h4 className="text-primary mb-4">
@@ -187,7 +202,7 @@ const AppProfile = () => {
 										<h5 className="f-w-500"> Name<span className="pull-right">:</span></h5>
 									</div>
 									<div className="col-9">
-										<span>Mitchell C.Shay</span>
+										<span>{isAuthenticated && info.username}</span>
 									</div>
 								</div>
 								<div className="row mb-2">
@@ -195,7 +210,7 @@ const AppProfile = () => {
 										<h5 className="f-w-500">Email<span className="pull-right">:</span></h5>
 									</div>
 									<div className="col-9">
-										<span>example@gmail.com</span>
+										<span>{isAuthenticated && info.email}</span>
 									</div>
 								</div>
 								<div className="row mb-2">
@@ -203,7 +218,7 @@ const AppProfile = () => {
 										<h5 className="f-w-500">Designation<span className="pull-right">:</span></h5>
 									</div>
 									<div className="col-9">
-										<span>Assistant professor</span>
+										<span>{isAuthenticated && info.desgination}</span>
 									</div>
 								</div>
 
@@ -220,7 +235,7 @@ const AppProfile = () => {
 										<h5 className="f-w-500">Year Experience<span className="pull-right">:</span></h5>
 									</div>
 									<div className="col-9">
-										<span>07 Year Experiences</span>
+										<span>{isAuthenticated && info.experience} Year Experiences</span>
 									</div>
 								</div>
 							</div>
@@ -230,12 +245,27 @@ const AppProfile = () => {
 								<div className="settings-form">
 									<h4 className="text-primary">Account Setting</h4>
 									<form onSubmit={onSave } >
+									<div className="form-group">
+											<label>Profile Image</label>
+											<input type="file" placeholder=" " 
+											// value={v}
+											id="fileInput"
+											onChange={(e)=>setfile(e.target.files[0])}
+											className="form-control"/>
+										</div>
 										<div className="form-row">
 											<div className="form-group col-md-6">
 												<label>Email</label>
-												<input type="email" placeholder="Email" 
+												<input type="email" placeholder="Official Email id" 
 												value={email}
-												onChange={(e) => setemail(e.target.value)}
+												onChange={(e)=>setemail(e.target.value)}
+												className="form-control"/>
+											</div>
+											<div className="form-group col-md-6">
+												<label>Name</label>
+												<input type="text" placeholder="Name" 
+												value={username}
+												onChange={(e)=>setusername(e.target.value)}
 												className="form-control"/>
 											</div>
 										</div>
@@ -275,12 +305,7 @@ const AppProfile = () => {
 												  className="custom-control-input"
 												  id="gridCheck"
 												/>
-												<label
-												  className="custom-control-label"
-												  htmlFor="gridCheck"
-												>
-												  Check me out
-												</label>
+												
 											</div>
 										</div>
 										<button className="btn btn-primary" type="submit">save</button>

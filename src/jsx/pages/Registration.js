@@ -42,7 +42,7 @@ function Register(props) {
     dispatch(loadingToggleAction(true));
 
    
-  // dispatch(signupAction(email, password, props.history));
+  dispatch(signupAction(email, password, props.history));
 
  
   try {
@@ -112,22 +112,7 @@ function Register(props) {
                           </div>
                         )}
                       </div>
-                      {/* <div className="text-center mt-4">
-                      <button type="submit" class="btn btn-primary" onClick={onverify}>Verify</button>
-                      </div>
-                    
-                      <div className="form-group">
-                        <label className="mb-1 ">
-                          <strong>Enter OTP</strong>
-                        </label>
-                        <input
-                          type="email"
-                          className="form-control"
-                          value={otp}
-                          onChange={(e) => setOtp(e.target.value)}
-                        />
-                      </div> */}
-
+                      
                       <div className="form-group">
                         <label className="mb-1 ">
                           <strong>Password</strong>

@@ -10,7 +10,7 @@ import { FirstStep } from "./StepOne";
 import { Secondstep } from "./StepTwo";
 import { Thirdstep } from "./StepThree";
 //import { useForm } from "react-hook-form";
-
+import {useAuth0} from "@auth0/auth0-react";
 var Desc;
 const  StepFour = (props)=> {
   console.log("Here, in step FOUR");
@@ -21,9 +21,10 @@ const  StepFour = (props)=> {
     }, 
   });*/
   // conosle.log({props.state.author});
-
+// const [email, setemail] = useState("");
+  const {user,isAuthenticated,isLoading}=useAuth0();
 Desc = description;
-
+// setemail(isAuthenticated && user.email);
 console.log("Hello");
 const par = FirstStep();
 console.log(par.Author);
@@ -44,7 +45,7 @@ const IISN = par2.Place;
 console.log(PP);
 const par3 = Thirdstep();
 const Link = par3.link;
-
+var email=isAuthenticated && user.email;
  
 async function onSignUp(e) {
   e.preventDefault();
@@ -61,12 +62,13 @@ async function onSignUp(e) {
     IISN,
     Link,
     Desc,
+    email
   });
   console.log("HEREPLEASE");
   // const history=
   // location.replace("http://localhost:3000/react/demo/login");
   // history.back();
-  window.location.replace("http://localhost:3000/review");
+  window.location.replace("http://localhost:3000/faculty");
 
 }
 console.log("Reached");

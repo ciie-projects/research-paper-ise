@@ -3,10 +3,25 @@ import {Link} from 'react-router-dom';
 import { MDBDataTable } from 'mdbreact';
 import Dropdownblog1 from './Dropdownblog1';
 import PageTitle from "../../../layouts/PageTitle";
-
+import { useState,useEffect } from 'react';
+import axios from 'axios';
 
 const Customerlist = () => {
 	
+	const [rec,setrec]=useState([]);
+
+	useEffect(()=>
+	{const getdata=async()=>{
+		const res=await axios.get("api/profiles/");
+		// console.log(res.data);
+		var d=res.data;
+		setrec(d.slice(-5,-1));
+	}
+	getdata();
+	
+	})
+	console.log(rec);
+
   const data = {
     columns: [
 		{label: 
@@ -17,13 +32,11 @@ const Customerlist = () => {
 				</div>
 			</div>
 		, },
-		// {label: 'Order ID', field: 'id', sort: 'asc',  width: 100},
-		// {label: 'date', field: 'date',   sort: 'asc', },
 		{label: 'Faculty Name', field: 'customer',	sort: 'asc', 	},
 		{label: 'Designation', field: 'location', sort: 'asc', 	},
 		{label: 'Total Papers', field: 'amount', sort: 'asc', 	},
 		{label: 'Email-id', field: 'status',  sort: 'asc',	},
-		// {label: 'Action', field: 'dropdown',sort: 'asc',	},
+		
     ],	
     rows: [
 		{	check: 
@@ -33,8 +46,8 @@ const Customerlist = () => {
 						<label className="custom-control-label" htmlFor="customCheckBox66"></label>						
 					</div> */}
 				</div>,
-			id: '#5552311',	date: '26 March 2020 ',	customer:"Dr. M. Dakshayani",	location: 'Professor',	amount: '10',
-			status: <Link to ={"/ecom-product-detail"} className="btn bgl-light text-black btn-sm">dakshayini.ise@bmsce.ac.in</Link>,
+			id: '#5552311',	date: '26 March 2020 ',	customer:"",	location: 'Professor',	amount: '10',
+			status: <Link to ={"/ecom-product-detail"} className="btn bgl-light text-black btn-sm"></Link>,
 			dropdown:<Dropdownblog1 />,
 		},
 		{

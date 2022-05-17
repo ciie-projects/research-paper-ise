@@ -3,11 +3,17 @@ import { Link } from "react-router-dom";
 /// Scroll
 import PerfectScrollbar from "react-perfect-scrollbar";
 import LogoutPage from './Logout';
-/// Image
+/// Imag
 import profile from "../../../images/profile/12.png";
 import avatar from "../../../images/avatar/1.jpg";
+import {useAuth0} from "@auth0/auth0-react";
+
 
 const Header = ({ onNote, toggle, onProfile, onActivity, onNotification}) => {
+   const {user,isAuthenticated,isLoading}=useAuth0();
+console.log(user);
+console.log(isAuthenticated);
+console.log(isLoading);
    var path = window.location.pathname.split("/");
    var name = path[path.length - 1].split("-");
    var filterName = name.length >= 3 ? name.filter((n, i) => i > 0) : name;
@@ -53,20 +59,11 @@ const Header = ({ onNote, toggle, onProfile, onActivity, onNotification}) => {
 
                   <ul className="navbar-nav header-right">
                      <li className="nav-item">
-						{/*  <div className="input-group search-area d-lg-inline-flex d-none">
-                           <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Search something here..."
-                           />
-                           <div className="input-group-append">
-                              <span className="input-group-text">
-                                 <i className="flaticon-381-search-2"></i>
-                              </span>
-                           </div>
-                        </div> */}
+						
                      </li>
-					 <li className="nav-item dropdown notification_dropdown">
+					 {isAuthenticated &&
+                <>
+                <li className="nav-item dropdown notification_dropdown">
                         <Link to ={"#"}
                            className="nav-link  ai-icon"
                            role="button"
@@ -285,7 +282,7 @@ const Header = ({ onNote, toggle, onProfile, onActivity, onNotification}) => {
                            </PerfectScrollbar>
                            
                         </div>
-                     </li>
+                     </li></>}
                      <li
                         className={`nav-item dropdown header-profile ${
                            toggle === "profile" ? "show" : ""
@@ -297,11 +294,12 @@ const Header = ({ onNote, toggle, onProfile, onActivity, onNotification}) => {
                            role="button"
                            data-toggle="dropdown"
                         >
+                           
                            <div className="header-info">
-								<small>Good Morning</small>
-								<span>Vivek</span>
+								<small>HELLO</small>
+								{isAuthenticated && <span>{isAuthenticated && user.given_name}</span>}
                            </div>
-                           <img src={profile} width="20" alt="" />
+                        {isAuthenticated && <img src={user.picture} width="20" alt="" />}
                         </Link>
                         <div
                            className={`dropdown-menu dropdown-menu-right ${
