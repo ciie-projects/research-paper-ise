@@ -121,7 +121,7 @@ const Markup = () => {
     { url: "dashboard", component: Home },
 	{ url: "companies", component: Companies },
 	{ url: "analytics", component: Analytics },
-	{ url: "faculty", component:isAuthenticated? Review:Login},
+	{ url: "faculty", component: Review},
 	{ url: "order", component: Order },
 	{ url: "order-list", component: Orderlist },
 	{ url: "faculty-list", component:isAuthenticated?Customerlist:Login},

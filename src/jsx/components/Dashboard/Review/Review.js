@@ -1,3 +1,5 @@
+
+
 import React ,{ Fragment } from 'react';
 import {Link} from 'react-router-dom';
 import PageTitle from "../../../layouts/PageTitle";
@@ -7,25 +9,45 @@ import {useAuth0} from "@auth0/auth0-react";
 
 function Review(){
 	
-		const [rec,setrec]=useState({});
+		const [info,setinfo]=useState([]);
 
-		useEffect(()=>
-		{const getdata=async()=>{
-			const res=await axios.get("api/profiles/");
-			// console.log(res.data);
-			var d=res.data;
-          console.log(d);
-		  setrec(d);
-		}
-		getdata();
+		// useEffect(()=>
+		// {const getdata=async()=>{
+		// 	const res=await axios.get("api/profiles/");
+		// 	// console.log(res.data);
+		// 	var d=res.data;
+        //   console.log(d);
+		//   setrec(d);
+		// }
+		// getdata();
 		
-		})
-		console.log(rec);
+		// })
+		// console.log(rec);
 
 		const {user,isAuthenticated,isLoading}=useAuth0();
-		return(
+		// console.log(isAuthenticated && rec[36].email);
 
+		useEffect(()=>{
+
+			const fetchData = async () => {
+			  try {
+				const res=await axios.get(`/api/profiles/`);
+				console.log(res.data);
+				setinfo(res.data);
+				
 			
+			  } catch (error) {
+				 console.log(error);
+			  }
+			  };
+			// console.log(isLoading);
+			console.log(info);
+
+			console.log(isAuthenticated && info[0].email);
+			console.log(isAuthenticated && info[0].experience);
+			     fetchData();
+			})
+		return(	
 			<>
                     <PageTitle activeMenu="Submissions" motherMenu="Dashboard" />
 
@@ -38,246 +60,39 @@ function Review(){
 				<div className="row">
 					<div className="col-xl-12">
 						<div className="card review-table p-0 border-0">
-
-					     <div className="row align-items-center p-4  border-bottom">
+                              {info.map((member,key)=>(
+					          <div className="row align-items-center p-4  border-bottom">
 								<div className="col-xl-4 col-xxl-4 col-lg-5 col-md-12">
 									<div className="media align-items-center">
 										<div className="custom-control custom-checkbox mr-4">
 											
 										</div>
-										<Link to={"/ecom-product-detail"}>
-											<img className="mr-3 img-fluid rounded-circle" width="100" src={require("../../../../images/profile/first.jpeg").default} alt="DexignZone" />
+										<Link to={`/faculty/${isAuthenticated && member.email}`}>	
+												<img className="mr-3 img-fluid rounded-circle" width="75" src={isAuthenticated && member.pic} alt="DexignZone" />
 										</Link>	
 										<div className="card-body p-0">
-											<h3 className="fs-20 text-black font-w600 mb-2"><Link to={"/app-profile"} className="text-black">rec[3].username</Link></h3>
-											<span className="text-dark">26/04/2020, 12:42 AM</span>
+											<h3 className="fs-20 text-black font-w600 mb-2"><Link to={"/app-profile"} className="text-black">{isAuthenticated && member.username}</Link></h3>
+											<span className="text-dark"> {isAuthenticated && member.email}</span>
 										</div>
 									</div>
 								</div>
 								<div className="col-xl-5 col-xxl-4 col-lg-7 col-md-12 mt-3 mt-lg-0">
-									<p className="mb-0 text-dark">Professor
+									<p className="mb-0 text-dark">
+										 <div>Designation:  {isAuthenticated && member.desgination} </div>
 
-                                       Ph.D.
-
-                                        dakshayini.ise@bmsce.ac.in
-
-                                        Research Interests: Computer Networks, Algorithms, Cloud computing, Ad-hoc Networks, IoT and Data Analytics and Blockchain Technology </p>
+                                        Research Interests: {isAuthenticated && member.researchInt} </p>
 								</div>
 								<div className="col-xl-3 col-xxl-4 col-lg-7 col-md-12 offset-lg-5 offset-xl-0 media-footer mt-xl-0 mt-3">
 									<div className="row">
 										<div className="text-xl-center col-xl-7 col-sm-9 col-lg-8 col-6">
-											<h2 className="text-black font-w600">rec[3].experience</h2>
-											<span className="star-review d-inline-block">
-												<i className="fa fa-star text-orange"></i>
-												<i className="fa fa-star text-orange"></i>
-												<i className="fa fa-star text-orange"></i>
-												<i className="fa fa-star text-orange"></i>
-												<i className="fa fa-star text-gray"></i>
-											</span>
+											<h2 className="text-black font-w600">{isAuthenticated && member.experience}</h2>		
 										</div>
 									</div>
 								</div>
-							</div>
-							<div className="row align-items-center p-4  border-bottom">
-								<div className="col-xl-4 col-xxl-4 col-lg-5 col-md-12">
-									<div className="media align-items-center">
-										<div className="custom-control custom-checkbox mr-4">
-										</div>
-										<Link to={"/ecom-product-detail"}>
-											<img className="mr-3 img-fluid rounded-circle" width="100" src={require("../../../../images/profile/third.jpeg").default} alt="DexignZone" />
-										</Link>	
-										<div className="card-body p-0">
-											<h3 className="fs-20 text-black font-w600 mb-2"><Link to={"/app-profile"} className="text-black">
-                                      Dr. P JAYAREKHA</Link></h3>
-											<span className="text-dark">26/04/2020, 12:42 AM</span>
-										</div>
-									</div>
-								</div>
-								<div className="col-xl-5 col-xxl-4 col-lg-7 col-md-12 mt-3 mt-lg-0">
-									<p className="mb-0 text-dark">Professor & HOD
-
-                                         Ph.D.
-
-                                    jayarekha.ise@bmsce.ac.in
-
-                                    Research Interests: 1.Computer communications and Networks 2. Algorithms 3. Cloud Computing</p>
-								</div>
-								<div className="col-xl-3 col-xxl-4 col-lg-7 col-md-12 offset-lg-5 offset-xl-0 media-footer mt-xl-0 mt-3">
-									<div className="row">
-										<div className="text-xl-center col-xl-7 col-sm-9 col-lg-8 col-6">
-											<h2 className="text-black font-w600">4.2</h2>
-											<span className="star-review d-inline-block">
-												<i className="fa fa-star text-orange"></i>
-												<i className="fa fa-star text-orange"></i>
-												<i className="fa fa-star text-orange"></i>
-												<i className="fa fa-star text-orange"></i>
-												<i className="fa fa-star text-gray"></i>
-											</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div className="row align-items-center p-4  border-bottom">
-								<div className="col-xl-4 col-xxl-4 col-lg-5 col-md-12">
-									<div className="media align-items-center">
-										<div className="custom-control custom-checkbox mr-4">
-										</div>
-										<Link to={"/ecom-product-detail"}>
-											<img className="mr-3 img-fluid rounded-circle" width="100" src={require("../../../../images/profile/fifth.jpeg").default} alt="DexignZone" />
-										</Link>	
-										<div className="card-body p-0">
-											
-											<h3 className="fs-20 text-black font-w600 mb-2"><Link to={"/app-profile"} className="text-black">
-                                         RASHMI R</Link></h3>
-											<span className="text-dark">26/04/2020, 12:42 AM</span>
-										</div>
-									</div>
-								</div>
-								<div className="col-xl-5 col-xxl-4 col-lg-7 col-md-12 mt-3 mt-lg-0">
-									<p className="mb-0 text-dark">Assistant Professor
-
-                                       M.Tech
-
-                                   rashmir.ise@bmsce.ac.in
-
-                                       Research Interests: 1) Computer Network 2) Data Science</p>
-								</div>
-								<div className="col-xl-3 col-xxl-4 col-lg-7 col-md-12 offset-lg-5 offset-xl-0 media-footer mt-xl-0 mt-3">
-									<div className="row">
-										<div className="text-xl-center col-xl-7 col-sm-9 col-lg-8 col-6">
-											<h2 className="text-black font-w600">4.2</h2>
-											<span className="star-review d-inline-block">
-												<i className="fa fa-star text-orange"></i>
-												<i className="fa fa-star text-orange"></i>
-												<i className="fa fa-star text-orange"></i>
-												<i className="fa fa-star text-orange"></i>
-												<i className="fa fa-star text-gray"></i>
-											</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div className="row align-items-center p-4  border-bottom">
-								<div className="col-xl-4 col-xxl-4 col-lg-5 col-md-12">
-									<div className="media align-items-center">
-										<div className="custom-control custom-checkbox mr-4">
-										</div>
-										<Link to={"/ecom-product-detail"}>
-											<img className="mr-3 img-fluid rounded-circle" width="100" src={require("../../../../images/profile/second.jpeg").default} alt="DexignZone" />
-										</Link>	
-										<div className="card-body p-0">
-											<h3 className="fs-20 text-black font-w600 mb-2"><Link to={"/app-profile"} className="text-black">
-                                        GURURAJA H S</Link></h3>
-											<span className="text-dark">26/04/2020, 12:42 AM</span>
-										</div>
-									</div>
-								</div>
-								<div className="col-xl-5 col-xxl-4 col-lg-7 col-md-12 mt-3 mt-lg-0">
-									<p className="mb-0 text-dark">Assistant Professor
-
-                                     M.Tech.
-
-                                     gururajhs.ise@bmsce.ac.in
-
-                                   Research Interests: Cryptography & Network Security, Informatics & Computing, Robotics Process Automation</p>
-								</div>
-								<div className="col-xl-3 col-xxl-4 col-lg-7 col-md-12 offset-lg-5 offset-xl-0 media-footer mt-xl-0 mt-3">
-									<div className="row">
-										<div className="text-xl-center col-xl-7 col-sm-9 col-lg-8 col-6">
-											<h2 className="text-black font-w600">4.5</h2>
-											<span className="star-review d-inline-block">
-												<i className="fa fa-star text-orange"></i>
-												<i className="fa fa-star text-orange"></i>
-												<i className="fa fa-star text-orange"></i>
-												<i className="fa fa-star text-orange"></i>
-												<i className="fa fa-star text-gray"></i>
-											</span>
-										</div>
-								
-									</div>
-								</div>
-							</div>
-							<div className="row align-items-center p-4  border-bottom">
-								<div className="col-xl-4 col-xxl-4 col-lg-5 col-md-12">
-									<div className="media align-items-center">
-										<div className="custom-control custom-checkbox mr-4">
-										</div>
-										<Link to={"#"}>
-											<img className="mr-3 img-fluid rounded-circle" width="100" src={require("../../../../images/profile/fourth.jpeg").default} alt="DexignZone" />
-										</Link>	
-										<div className="card-body p-0">
-											{/* <p className="text-primary fs-14 mb-0">#C01234</p> */}
-											<h3 className="fs-20 text-black font-w600 mb-2"><Link to={"/app-profile"} className="text-black">
-                                           Dr. SHEELA S V</Link></h3>
-											<span className="text-dark">26/04/2020, 12:42 AM</span>
-										</div>
-									</div>
-								</div>
-								<div className="col-xl-5 col-xxl-4 col-lg-7 col-md-12 mt-3 mt-lg-0">
-									<p className="mb-0 text-dark">Professor
-
-                                       Ph.D.
-
-                                        ssv.ise@bmsce.ac.in
-
-                                       Research Interests: Biometrics, Human Computer Interaction</p>
-								</div>
-								<div className="col-xl-3 col-xxl-4 col-lg-7 col-md-12 offset-lg-5 offset-xl-0 media-footer mt-xl-0 mt-3">
-									<div className="row">
-										<div className="text-xl-center col-xl-7 col-sm-9 col-lg-8 col-6">
-											<h2 className="text-black font-w600">4.2</h2>
-											<span className="star-review d-inline-block">
-												<i className="fa fa-star text-orange"></i>
-												<i className="fa fa-star text-orange"></i>
-												<i className="fa fa-star text-orange"></i>
-												<i className="fa fa-star text-orange"></i>
-												<i className="fa fa-star text-gray"></i>
-											</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div className="row align-items-center p-4  border-bottom">
-								<div className="col-xl-4 col-xxl-4 col-lg-5 col-md-12">
-									<div className="media align-items-center">
-										<div className="custom-control custom-checkbox mr-4">
-										</div>
-										<Link to={"/ecom-product-detail"}>
-											<img className="mr-3 img-fluid rounded-circle" width="100" src={require("../../../../images/profile/sixth.jpeg").default} alt="DexignZone" />
-										</Link>	
-										<div className="card-body p-0">
-											<p className="text-primary fs-14 mb-0"></p>
-											<h3 className="fs-20 text-black font-w600 mb-2"><Link to={"/app-profile"} className="text-black">PALLAVI B</Link></h3>
-											<span className="text-dark">26/04/2020, 12:42 AM</span>
-										</div>
-									</div>
-								</div>
-								<div className="col-xl-5 col-xxl-4 col-lg-7 col-md-12 mt-3 mt-lg-0">
-									<p className="mb-0 text-dark">Assistant Professor
-
-                                   M.Tech
-
-                                   pallavib.ise@bmsce.ac.in
-
-                                         Research Interests: Machine learning,Data analytics,</p>
-								</div>
-								<div className="col-xl-3 col-xxl-4 col-lg-7 col-md-12 offset-lg-5 offset-xl-0 media-footer mt-xl-0 mt-3">
-									<div className="row">
-										<div className="text-xl-center col-xl-7 col-sm-9 col-lg-8 col-6">
-											<h2 className="text-black font-w600">4.2</h2>
-											<span className="star-review d-inline-block">
-												<i className="fa fa-star text-orange"></i>
-												<i className="fa fa-star text-orange"></i>
-												<i className="fa fa-star text-orange"></i>
-												<i className="fa fa-star text-orange"></i>
-												<i className="fa fa-star text-gray"></i>
-											</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+							</div> ))}
+ 
+						     </div>
+					      </div>
 				</div>
 					
 			</Fragment>

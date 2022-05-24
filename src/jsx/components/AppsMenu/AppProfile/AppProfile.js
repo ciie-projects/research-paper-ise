@@ -87,8 +87,6 @@ console.log("profile"+isAuthenticated);
 			const res=await axios.get(`/api/profiles/${isAuthenticated && user.email}`);
 			console.log(res.data);
 		    setinfo(res.data);
-			
-	
 		} catch (error) {
 		   console.log(error);
 		}
