@@ -19,6 +19,7 @@ import Order from "./components/Dashboard/Order/Order";
 import Orderlist from "./components/Dashboard/Orderlist/Orderlist";
 import Customerlist from "./components/Dashboard/Customerlist/Customerlist";
 import Task from './components/Dashboard/Task';
+import Frontpage from "./components/Dashboard/front-page/Front-page"
 
 /// App
 import AppProfile from './components/AppsMenu/AppProfile/AppProfile'
@@ -117,15 +118,16 @@ const Markup = () => {
 
   const routes = [
     /// Dashboard
-    { url: "", component:Login },
+    // { url: "", component: Home },
     { url: "dashboard", component: Home },
 	{ url: "companies", component: Companies },
 	{ url: "analytics", component: Analytics },
-	{ url: "faculty", component:isAuthenticated? Review:Login},
+	{ url: "faculty", component: Review },
 	{ url: "order", component: Order },
 	{ url: "order-list", component: Orderlist },
-	{ url: "faculty-list", component:isAuthenticated?Customerlist:Login},
+	{ url: "faculty-list", component: Customerlist },
 	{ url: 'task', component: Task },
+  {url:'',component:Frontpage},
 
     /// Apps
     { url: 'app-profile', component: AppProfile },
@@ -178,6 +180,7 @@ const Markup = () => {
     /// Shop
     { url: 'ecom-product-grid', component: ProductGrid },
     { url: 'ecom-product-list', component: ProductList },
+    // { url: 'ecom-product-detail', component: ProductDetail },
     { url: 'faculty/:email', component:isAuthenticated? ProductDetail:Login},
     { url: 'ecom-product-order', component: ProductOrder },
     { url: 'ecom-checkout', component: Checkout },
@@ -191,7 +194,7 @@ const Markup = () => {
     { url: 'form-redux-wizard', component: WizardForm },
     { url: 'form-element', component: Element },
     // { url: 'form-wizard', component: Wizard },
-    { url: 'publish', component:isAuthenticated? Wizard:Login },
+    { url: 'publish', component:isAuthenticated? Wizard:Frontpage },
     { url: 'form-editor-summernote', component: SummerNote },
     { url: 'form-pickers', component: Pickers },
     { url: 'form-validation-jquery', component: jQueryValidation },
@@ -217,8 +220,8 @@ const Markup = () => {
   return (
        <> 
           <div
-            id={`${!pagePath? 'main-wrapper' : ''}`}
-            className={`${!pagePath  ? 'show' : 'mh100vh'}`}
+            id={`${!pagePath ? 'main-wrapper' : ''}`}
+            className={`${!pagePath ? 'show' : 'mh100vh'}`}
           >
             {!pagePath && (
               <Nav

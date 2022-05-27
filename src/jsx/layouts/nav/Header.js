@@ -289,14 +289,13 @@ console.log(isLoading);
                         }`}
                         onClick={() => onProfile()}
                      >
-                        <Link to={"#"}
+                     <Link to={"#"}
                            className="nav-link"
                            role="button"
                            data-toggle="dropdown"
                         >
-                           
-                           <div className="header-info">
-								<small>HELLO</small>
+                        <div className="header-info">
+								<small>{isAuthenticated && "HELLO"}</small>
 								{isAuthenticated && <span>{isAuthenticated && user.given_name}</span>}
                            </div>
                         {isAuthenticated && <img src={user.picture} width="20" alt="" />}
