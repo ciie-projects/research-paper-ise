@@ -10,11 +10,14 @@ import  ThemeContext  from "./context/ThemeContext";
 import {Auth0Provider} from "@auth0/auth0-react";
 
 
+
 ReactDOM.render(
     <Auth0Provider 
     domain='dev-fvk8rv7s.us.auth0.com'
     clientId='Wj0izvLwGZDagYkZHup2XQQ4QCJkSpQw'
     redirectUri={"http://localhost:3000/dashboard"}
+    // useRefreshTokens={true}
+    // cacheLocation='localstorage'
     >
     <React.StrictMode>
         <Provider store = {store}>

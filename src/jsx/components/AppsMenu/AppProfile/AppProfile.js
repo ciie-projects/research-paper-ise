@@ -1,3 +1,4 @@
+
 import React, { Fragment, useEffect, useState } from "react";
 import { Button, Dropdown, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -27,7 +28,7 @@ const AppProfile = () => {
   const [postModal, setPostModal] = useState(false);
   const [cameraModal, setCameraModal] = useState(false);
   const [linkModal, setLinkModal] = useState(false);
-  const [file,setfile]=useState(null);
+  
   const [replayModal, setReplayModal] = useState(false);
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
@@ -39,8 +40,39 @@ const AppProfile = () => {
   const [userData , setuserData] = useState("");
   const history = useHistory();
   const [info,setinfo]=useState("");
+ // const [filE, setFile] = useState();
+ const [file,setfile]=useState(null);
+  const [filename, setFileName] = useState("");
 
-console.log("profile"+isAuthenticated);
+console.log("profile here"+isAuthenticated);
+// console.log(user.email);
+
+      const saveFile = (e) => {
+		  console.log("Inisde save");
+        setfile(e.target.files[0]);
+        setFileName(e.target.files[0].name);
+      };
+      const uploadFile = async (e) => {
+        const formData = new FormData();
+        formData.append("data", file);
+        formData.append("name", filename);
+		console.log("HERE @");
+		console.log(filename);
+		console.log(file);
+		console.log(isAuthenticated && user.email);
+		console.log(formData);
+        try {
+			
+			await axios.post(`/api/profiles/${isAuthenticated && user.email}`,formData);
+			console.log("Done");
+			
+        } catch (ex) {
+          console.log(ex);
+		  console.log("Error: "+ex );
+        }
+      };
+
+
   async function onSave(e){
     e.preventDefault();
    
@@ -49,22 +81,23 @@ console.log("profile"+isAuthenticated);
 		  email,
 		  password,
 		  aboutme,
-          researchInt,
+      researchInt,
 		  desgination,
 		  experience,
-		  username
+		  username 
 		});
 		if(file){
 			// const data=new FormData();
 			// console.log(data);
 			const data=Date.now()+file.name;
-			data.append("name",data);
             data.append("file",file);
+			data.append("name",data);
+			console.log("HERE @");
 				console.log(data);
 			try{
-              
+                 console.log("INSIDE #");
                 await axios.post(`/api/profiles/${isAuthenticated && user.email}`,data);
-        
+                console.log("Done");
         
             }
 			catch(err){
@@ -99,7 +132,7 @@ console.log("profile"+isAuthenticated);
 	
 	
 	   fetchData();
-  })
+  },[]);
 
 
 
@@ -112,17 +145,27 @@ console.log("profile"+isAuthenticated);
         <div className="col-lg-12">
           <div className="profile card card-body px-3 pt-3 pb-0">
             <div className="profile-head">
-              <div className="photo-content">
-                {/* <div className="cover-photo"></div> */}
-				<img src="https://www.easytourz.com/uploads/Businesslogo/1565164968.jpg"></img>
-              </div>
-              <div className="profile-info">
+              {/* <div className="photo-content">
+                {/* <div className="cover-photo"></div> 
+				            <img src="https://www.easytourz.com/uploads/Businesslogo/1565164968.jpg"></img>
+               </div> */}
+               <div className="profile-info">
                 <div className="profile-photo">
                   <img
                     src={isAuthenticated && info.pic}
                     className="img-fluid rounded-circle"
                     alt="profile"
-                  />
+                  /><div className="form-group">
+				  {/* <label>Update Profile</label>
+				  <input type="file" placeholder=" " 
+				  // value={v}
+				  id="fileInput"
+				  onChange={(e)=>setfile(e.target.files[0])}
+				  className="form-control"/>
+				  <button type="submit" className="btn btn-primary" onClick={uploadFile}>Save</button> */}
+				   <input type="file" onChange={saveFile} name="data" />
+                 <button onClick={uploadFile}>Upload</button>
+			  </div>
                 </div>
                 <div className="profile-details">
                   <div className="profile-name px-3 pt-2">
@@ -245,14 +288,7 @@ console.log("profile"+isAuthenticated);
 								<div className="settings-form">
 									<h4 className="text-primary">Account Setting</h4>
 									<form onSubmit={onSave } >
-									<div className="form-group">
-											<label>Profile Image</label>
-											<input type="file" placeholder=" " 
-											// value={v}
-											id="fileInput"
-											onChange={(e)=>setfile(e.target.files[0])}
-											className="form-control"/>
-										</div>
+									
 										<div className="form-row">
 											<div className="form-group col-md-6">
 												<label>Email</label>

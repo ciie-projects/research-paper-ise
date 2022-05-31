@@ -167,25 +167,25 @@ class SideBar extends Component {
               </Link>
 				<ul >
 					<li>
-						<Link className={`${path === "" ? "mm-active" : ""}`} to="/dashboard" onClick={() => this.props.onClick3()}>Dashboard</Link>
+						<a className={`${path === "" ? "mm-active" : ""}`} href="/dashboard" onClick={() => this.props.onClick3()}>Dashboard</a>
 					</li>
 
 					<li>
-						<Link className={`${path === "review" ? "mm-active" : ""}`} onClick={() => this.props.onClick()} to="/faculty" >
+						<a className={`${path === "review" ? "mm-active" : ""}`} onClick={() => this.props.onClick()} href="/faculty" >
 							Submisions
-						</Link>
+						</a>
 					</li>
 				
 					<li>
-					  <Link className={`${ path === "customer-list" ? "mm-active" : "" }`} onClick={() => this.props.onClick()} to="/faculty-list"
+					  <a className={`${ path === "customer-list" ? "mm-active" : "" }`} onClick={() => this.props.onClick()} href="/faculty-list"
 					  >
 						Faculty List
-					  </Link>
+					  </a>
 					</li>
 					
 				</ul>
             </li>
-            <li className={`${app.includes(path) ? "mm-active" : ""}`}>
+             <li className={`${app.includes(path) ? "mm-active" : ""}`}>
               
               <ul >
                 
@@ -196,14 +196,14 @@ class SideBar extends Component {
            
             
             <li className={`${forms.includes(path) ? "mm-active" : ""}`}>
-              <Link className="has-arrow ai-icon" to="#" >
+              <a className="has-arrow ai-icon" href="#" >
                 <i className="flaticon-381-notepad"></i>
                 <span className="nav-text forms">Publish Form</span>
-              </Link>
+              </a>
               <ul >
               
                 <li>
-                    <Link className={`${path === "form-wizard" ? "mm-active" : ""}`} onClick={() => this.props.onClick()} to="/publish">Publish</Link>
+                    <a className={`${path === "form-wizard" ? "mm-active" : ""}`} onClick={() => this.props.onClick()} href="/publish">Publish</a>
                 </li>
              
               </ul>

@@ -196,6 +196,7 @@ import {useAuth0} from "@auth0/auth0-react";
    
 export default function Login (){
   const{loginWithRedirect}=useAuth0();
+
   return (
     <div className="login-main-page" style={{backgroundImage:"url(https://admissionkaro.com/wp-content/uploads/2017/03/bms-college-of-engineering-bangalore-bmsce-fee-structure.jpg)"}}>
         <div className="login-wrapper">
@@ -239,7 +240,11 @@ export default function Login (){
                                 <button
                                   type="submit"
                                   className="btn bg-white text-primary btn-block"
-                                  onClick={()=>loginWithRedirect()}
+                                  onClick={()=>{var val=loginWithRedirect()
+                                    console.log(val);
+                                 }
+                                  
+                                  }
                                 >
                                   Sign In
                                 </button>

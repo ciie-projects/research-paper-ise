@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Modal, Nav, Tab } from "react-bootstrap";
 import { Link,useLocation } from "react-router-dom";
@@ -15,7 +16,7 @@ import PageTitle from "../../../../layouts/PageTitle";
 import {useAuth0} from "@auth0/auth0-react";
 import axios from "axios";
 import { useEffect } from "react";
-
+var sub;
 const ProductDetail = () => {
   const location=useLocation();
   const path= location.pathname.split("/")[2];
@@ -37,11 +38,13 @@ const ProductDetail = () => {
          console.log(error);
       }
       };
-    
+    console.log("Here####@@@");
+  //  console.log(info);
     console.log(info);
-       
-    
-    
+       sub = info.work; 
+    console.log("After%%");
+    console.log(sub);
+    console.log("Finsied**");
        fetchData();
     })
 	
@@ -115,7 +118,7 @@ const ProductDetail = () => {
 						</p>
 						<p className="text-content">
 						{isAuthenticated && info.aboutme}
-						</p>
+						</p> 
                     </div>
                   </div>
                 </div>
@@ -134,37 +137,20 @@ const ProductDetail = () => {
               <Table responsive hover className="header-border verticle-middle">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Title</th>
                     <th scope="col">Link for the Publication</th>
                 
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th>1</th>
-                    <td>Intro to AI and ML</td>
+                 
+               {sub?.map((member,key)=>(
+                 <tr>
                     <td>
-                      <a href="https://ciie-backend.s3.amazonaws.com/Shashank+MHello.pdf">https://ciie-backend.s3.amazonaws.com/Shashank+MHello.pdf</a>
-                    </td>
-                    
-                  </tr>
-				  <tr>
-                    <th>2</th>
-                    <td>Intro to AI and ML</td>
-                    <td>
-                      <a href="https://ciie-backend.s3.amazonaws.com/Shashank+MHello.pdf">https://ciie-backend.s3.amazonaws.com/Shashank+MHello.pdf</a>
-                    </td>
-
-                  </tr>
-				  <tr>
-                    <th>3</th>
-                    <td>Intro to AI and ML</td>
-                    <td>
-                      <a href="https://ciie-backend.s3.amazonaws.com/Shashank+MHello.pdf">https://ciie-backend.s3.amazonaws.com/Shashank+MHello.pdf</a>
-                    </td>
-                    
-                  </tr>
+                      <a href={isAuthenticated && member}>{isAuthenticated && member}</a>
+                    </td>   
+                 </tr>
+               ))}
+				           
               
                 </tbody>
               </Table>
