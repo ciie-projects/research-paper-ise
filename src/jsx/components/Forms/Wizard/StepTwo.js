@@ -2,7 +2,6 @@ import React, {useState } from "react";
 import { useForm } from 'react-hook-form';
 var FirstName , Date , Phonenumber , Place;
 const StepTwo = (props) => {
-   console.log("Here,in step Two");
    const [firstName, setfirstName] = useState("");
    const [date, setdate] = useState("");
    const [phoneNumber, setphoneNumber] = useState("");

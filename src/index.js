@@ -15,7 +15,7 @@ ReactDOM.render(
     <Auth0Provider 
     domain='dev-fvk8rv7s.us.auth0.com'
     clientId='Wj0izvLwGZDagYkZHup2XQQ4QCJkSpQw'
-    redirectUri={"http://localhost:3000/dashboard"}
+    redirectUri={"https://securiteam.me/dashboard"}
     // useRefreshTokens={true}
     // cacheLocation='localstorage'
     >

@@ -13,7 +13,6 @@ import { Thirdstep } from "./StepThree";
 import {useAuth0} from "@auth0/auth0-react";
 var Desc;
 const  StepFour = (props)=> {
-  console.log("Here, in step FOUR");
   const [description, setdescription] = useState("");
  /* const { handleSubmit } = useForm({
     defaultValues: {
@@ -25,9 +24,7 @@ const  StepFour = (props)=> {
   const {user,isAuthenticated,isLoading}=useAuth0();
 Desc = description;
 // setemail(isAuthenticated && user.email);
-console.log("Hello");
 const par = FirstStep();
-console.log(par.Author);
 
 const Author = par.Author;
 const Publication = par.Publication;
@@ -36,20 +33,17 @@ const IF = par.If;
 const DOI = par.Doi;
 
 const par2 = Secondstep();
-console.log(par2.FirstName);
 
 const PP = par2.FirstName;
 const year = par2.Date;
 const vol = par2.Phonenumber;
 const IISN = par2.Place;
-console.log(PP);
 const par3 = Thirdstep();
 const Link = par3.link;
 var email=isAuthenticated && user.email;
  
 async function onSignUp(e) {
   e.preventDefault();
-  console.log("DEMO");
   await axios.post("/api/posts/", {
     Author,
     Publication,
@@ -64,14 +58,12 @@ async function onSignUp(e) {
     Desc,
     email
   });
-  console.log("HEREPLEASE");
   // const history=
   // location.replace("http://localhost:3000/react/demo/login");
   // history.back();
-  window.location.replace("http://localhost:3000/faculty");
+  window.location.replace("https://securiteam.me/faculty");
 
 }
-console.log("Reached");
 
 
   return (
@@ -99,7 +91,7 @@ console.log("Reached");
           </div>
         </div>
       </div>
-      <input type="submit" class="btn btn-primary" onClick={onSignUp}  />
+      <input type="submit" class="btn btn-primary" onClick={onSignUp} value="Submit"/>
     </section>
   );
 };

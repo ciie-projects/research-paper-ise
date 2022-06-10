@@ -48,7 +48,6 @@ import { useForm } from 'react-hook-form';
 var link;
 
 const StepThree = (props) => {
-   console.log("Here,in step THREE");
 const [Link, setLink]= useState("");
    const { handleSubmit} = useForm({
      defaultValues: {

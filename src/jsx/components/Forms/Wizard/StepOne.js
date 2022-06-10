@@ -6,7 +6,6 @@ import { useForm } from 'react-hook-form';
 var Author , Publication , TItle ,If, Doi ;
 
 const StepOne = (props) => {
-   console.log("Here,in step ONE");
 
 const [publicaton,setpublication]=useState("Type of Publication");
 
