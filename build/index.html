@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="/logo192.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <script type="text/javascript">
+      !(function (e, t) {
+        if (!t.__SV) {
+          var r,
+            a,
+            n = window;
+          try {
+            var p,
+              o,
+              i,
+              s = n.location,
+              c = s.hash;
+            (p = function (e, t) {
+              return (o = e.match(RegExp(t + "=([^&]*)"))) ? o[1] : null;
+            }),
+              c &&
+                p(c, "fpState") &&
+                "fpeditor" ===
+                  (i = JSON.parse(decodeURIComponent(p(c, "fpState"))))
+                    .action &&
+                (n.sessionStorage.setItem("_fpcehash", c),
+                history.replaceState(
+                  i.desiredHash || "",
+                  e.title,
+                  s.pathname + s.search
+                ));
+          } catch (e) {}
+          (window.freshpaint = t),
+            (t._i = []),
+            (t.init = function (e, n, p) {
+              function o(e, t) {
+                var r = t.split(".");
+                2 == r.length && ((e = e[r[0]]), (t = r[1])),
+                  (e[t] = function () {
+                    e.push(
+                      [t].concat(Array.prototype.slice.call(arguments, 0))
+                    );
+                  });
+              }
+              var i = t;
+              for (
+                void 0 !== p ? (i = t[p] = []) : (p = "freshpaint"),
+                  i.people = i.people || [],
+                  i.toString = function (e) {
+                    var t = "freshpaint";
+                    return (
+                      "freshpaint" !== p && (t += "." + p),
+                      e || (t += " (stub)"),
+                      t
+                    );
+                  },
+                  i.people.toString = function () {
+                    return i.toString(1) + ".people (stub)";
+                  },
+                  r =
+                    "disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove people group page alias ready addEventProperties addInitialEventProperties removeEventProperty addPageviewProperties".split(
+                      " "
+                    ),
+                  a = 0;
+                a < r.length;
+                a++
+              )
+                o(i, r[a]);
+              var s = "set set_once union unset remove delete".split(" ");
+              (i.get_group = function () {
+                function e(e) {
+                  t[e] = function () {
+                    (call2_args = arguments),
+                      (call2 = [e].concat(
+                        Array.prototype.slice.call(call2_args, 0)
+                      )),
+                      i.push([r, call2]);
+                  };
+                }
+                for (
+                  var t = {},
+                    r = ["get_group"].concat(
+                      Array.prototype.slice.call(arguments, 0)
+                    ),
+                    a = 0;
+                  a < s.length;
+                  a++
+                )
+                  e(s[a]);
+                return t;
+              }),
+                t._i.push([e, n, p]);
+            }),
+            (t.__SV = 1.4),
+            ((n = e.createElement("script")).type = "text/javascript"),
+            (n.async = !0),
+            (n.src =
+              "undefined" != typeof FRESHPAINT_CUSTOM_LIB_URL
+                ? FRESHPAINT_CUSTOM_LIB_URL
+                : "//perfalytics.com/static/js/freshpaint.js"),
+            (p = e.getElementsByTagName("script")[0])
+              ? p.parentNode.insertBefore(n, p)
+              : e.head.appendChild(n);
+        }
+      })(document, window.freshpaint || []),
+        freshpaint.init("147c0acb-451d-4f90-969a-7fd7eb20104b"),
+        freshpaint.page();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Poppins:ital@1&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <title>ISE-BMSCE</title>
+    <link href="/static/css/2.ea125119.chunk.css" rel="stylesheet" />
+    <link href="/static/css/main.9bcd9c74.chunk.css" rel="stylesheet" />
+  </head>
+  <body
+    data-typography="poppins"
+    data-theme-version="light"
+    data-layout="vertical"
+    data-nav-headerbg="color_3"
+    data-headerbg="color_1"
+    data-sidebar-style="full"
+    data-sibebarbg="color_3"
+    data-sidebar-position="fixed"
+    data-header-position="fixed"
+    data-container="wide"
+    direction="ltr"
+    data-primary="color_1"
+  >
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script>
+      !(function (e) {
+        function t(t) {
+          for (
+            var n, o, i = t[0], c = t[1], l = t[2], s = 0, p = [];
+            s < i.length;
+            s++
+          )
+            (o = i[s]),
+              Object.prototype.hasOwnProperty.call(a, o) &&
+                a[o] &&
+                p.push(a[o][0]),
+              (a[o] = 0);
+          for (n in c)
+            Object.prototype.hasOwnProperty.call(c, n) && (e[n] = c[n]);
+          for (f && f(t); p.length; ) p.shift()();
+          return u.push.apply(u, l || []), r();
+        }
+        function r() {
+          for (var e, t = 0; t < u.length; t++) {
+            for (var r = u[t], n = !0, o = 1; o < r.length; o++) {
+              var c = r[o];
+              0 !== a[c] && (n = !1);
+            }
+            n && (u.splice(t--, 1), (e = i((i.s = r[0]))));
+          }
+          return e;
+        }
+        var n = {},
+          o = { 1: 0 },
+          a = { 1: 0 },
+          u = [];
+        function i(t) {
+          if (n[t]) return n[t].exports;
+          var r = (n[t] = { i: t, l: !1, exports: {} });
+          return e[t].call(r.exports, r, r.exports, i), (r.l = !0), r.exports;
+        }
+        (i.e = function (e) {
+          var t = [];
+          o[e]
+            ? t.push(o[e])
+            : 0 !== o[e] &&
+              { 3: 1 }[e] &&
+              t.push(
+                (o[e] = new Promise(function (t, r) {
+                  for (
+                    var n =
+                        "static/css/" +
+                        ({}[e] || e) +
+                        "." +
+                        { 3: "7095a38d", 4: "31d6cfe0", 5: "31d6cfe0" }[e] +
+                        ".chunk.css",
+                      a = i.p + n,
+                      u = document.getElementsByTagName("link"),
+                      c = 0;
+                    c < u.length;
+                    c++
+                  ) {
+                    var l =
+                      (f = u[c]).getAttribute("data-href") ||
+                      f.getAttribute("href");
+                    if ("stylesheet" === f.rel && (l === n || l === a))
+                      return t();
+                  }
+                  var s = document.getElementsByTagName("style");
+                  for (c = 0; c < s.length; c++) {
+                    var f;
+                    if (
+                      (l = (f = s[c]).getAttribute("data-href")) === n ||
+                      l === a
+                    )
+                      return t();
+                  }
+                  var p = document.createElement("link");
+                  (p.rel = "stylesheet"),
+                    (p.type = "text/css"),
+                    (p.onload = t),
+                    (p.onerror = function (t) {
+                      var n = (t && t.target && t.target.src) || a,
+                        u = new Error(
+                          "Loading CSS chunk " + e + " failed.\n(" + n + ")"
+                        );
+                      (u.code = "CSS_CHUNK_LOAD_FAILED"),
+                        (u.request = n),
+                        delete o[e],
+                        p.parentNode.removeChild(p),
+                        r(u);
+                    }),
+                    (p.href = a),
+                    document.getElementsByTagName("head")[0].appendChild(p);
+                }).then(function () {
+                  o[e] = 0;
+                }))
+              );
+          var r = a[e];
+          if (0 !== r)
+            if (r) t.push(r[2]);
+            else {
+              var n = new Promise(function (t, n) {
+                r = a[e] = [t, n];
+              });
+              t.push((r[2] = n));
+              var u,
+                c = document.createElement("script");
+              (c.charset = "utf-8"),
+                (c.timeout = 120),
+                i.nc && c.setAttribute("nonce", i.nc),
+                (c.src = (function (e) {
+                  return (
+                    i.p +
+                    "static/js/" +
+                    ({}[e] || e) +
+                    "." +
+                    { 3: "799135d7", 4: "4ef97e32", 5: "948e4f3e" }[e] +
+                    ".chunk.js"
+                  );
+                })(e));
+              var l = new Error();
+              u = function (t) {
+                (c.onerror = c.onload = null), clearTimeout(s);
+                var r = a[e];
+                if (0 !== r) {
+                  if (r) {
+                    var n = t && ("load" === t.type ? "missing" : t.type),
+                      o = t && t.target && t.target.src;
+                    (l.message =
+                      "Loading chunk " +
+                      e +
+                      " failed.\n(" +
+                      n +
+                      ": " +
+                      o +
+                      ")"),
+                      (l.name = "ChunkLoadError"),
+                      (l.type = n),
+                      (l.request = o),
+                      r[1](l);
+                  }
+                  a[e] = void 0;
+                }
+              };
+              var s = setTimeout(function () {
+                u({ type: "timeout", target: c });
+              }, 12e4);
+              (c.onerror = c.onload = u), document.head.appendChild(c);
+            }
+          return Promise.all(t);
+        }),
+          (i.m = e),
+          (i.c = n),
+          (i.d = function (e, t, r) {
+            i.o(e, t) ||
+              Object.defineProperty(e, t, { enumerable: !0, get: r });
+          }),
+          (i.r = function (e) {
+            "undefined" != typeof Symbol &&
+              Symbol.toStringTag &&
+              Object.defineProperty(e, Symbol.toStringTag, { value: "Module" }),
+              Object.defineProperty(e, "__esModule", { value: !0 });
+          }),
+          (i.t = function (e, t) {
+            if ((1 & t && (e = i(e)), 8 & t)) return e;
+            if (4 & t && "object" == typeof e && e && e.__esModule) return e;
+            var r = Object.create(null);
+            if (
+              (i.r(r),
+              Object.defineProperty(r, "default", { enumerable: !0, value: e }),
+              2 & t && "string" != typeof e)
+            )
+              for (var n in e)
+                i.d(
+                  r,
+                  n,
+                  function (t) {
+                    return e[t];
+                  }.bind(null, n)
+                );
+            return r;
+          }),
+          (i.n = function (e) {
+            var t =
+              e && e.__esModule
+                ? function () {
+                    return e.default;
+                  }
+                : function () {
+                    return e;
+                  };
+            return i.d(t, "a", t), t;
+          }),
+          (i.o = function (e, t) {
+            return Object.prototype.hasOwnProperty.call(e, t);
+          }),
+          (i.p = "/"),
+          (i.oe = function (e) {
+            throw (console.error(e), e);
+          });
+        var c = (this.webpackJsonpISE = this.webpackJsonpISE || []),
+          l = c.push.bind(c);
+        (c.push = t), (c = c.slice());
+        for (var s = 0; s < c.length; s++) t(c[s]);
+        var f = l;
+        r();
+      })([]);
+    </script>
+    <script src="/static/js/2.0468bfee.chunk.js"></script>
+    <script src="/static/js/main.a5517fff.chunk.js"></script>
+  </body>
+</html>

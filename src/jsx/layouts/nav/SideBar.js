@@ -6,23 +6,21 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 /// Link
 import { Link } from "react-router-dom";
 
-
 class MM extends Component {
   componentDidMount() {
     this.$el = this.el;
     this.mm = new MetisMenu(this.$el);
   }
-  componentWillUnmount() {
+  componentWillUnmount() {}
+  render() {
+    return (
+      <div className="mm-wrapper">
+        <ul className="metismenu" ref={(el) => (this.el = el)}>
+          {this.props.children}
+        </ul>
+      </div>
+    );
   }
-    render() {
-        return (
-            <div className="mm-wrapper">
-                <ul className="metismenu" ref={(el) => (this.el = el)}>
-                    {this.props.children}
-                </ul>
-            </div>
-        );
-    }
 }
 
 class SideBar extends Component {
@@ -44,7 +42,7 @@ class SideBar extends Component {
     let path = window.location.pathname;
     path = path.split("/");
     path = path[path.length - 1];
-    
+
     /// Active menu
     let dashBoard = [
         "",
@@ -53,7 +51,7 @@ class SideBar extends Component {
         "order",
         "order-list",
         "customer-list",
-		"task",
+        "task",
       ],
       app = [
         "app-profile",
@@ -117,13 +115,8 @@ class SideBar extends Component {
         "uc-noui-slider",
         "map-jqvmap",
         //"post",
-        
       ],
-        redux = [
-            "todo",
-            "form-redux",
-            "form-redux-wizard", 
-        ],
+      redux = ["todo", "form-redux", "form-redux-wizard"],
       widget = ["widget-basic"],
       forms = [
         "form-element",
@@ -133,7 +126,7 @@ class SideBar extends Component {
         "form-validation-jquery",
       ],
       table = [
-        "table-bootstrap-basic", 
+        "table-bootstrap-basic",
         "table-datatable-basic",
         "table-sorting",
         "table-filtering",
@@ -161,57 +154,34 @@ class SideBar extends Component {
         <PerfectScrollbar className="deznav-scroll">
           <MM className="metismenu" id="menu">
             <li className={`${dashBoard.includes(path) ? "mm-active" : ""}`}>
-              <Link className="has-arrow ai-icon" to="#" >
+              <a href="/dashboard">
                 <i className="flaticon-381-networking"></i>
                 <span className="nav-text">Dashboard</span>
-              </Link>
-				<ul >
-					<li>
-						<a className={`${path === "" ? "mm-active" : ""}`} href="/dashboard" onClick={() => this.props.onClick3()}>Dashboard</a>
-					</li>
-
-					<li>
-						<a className={`${path === "review" ? "mm-active" : ""}`} onClick={() => this.props.onClick()} href="/faculty" >
-							Submisions
-						</a>
-					</li>
-				
-					<li>
-					  <a className={`${ path === "customer-list" ? "mm-active" : "" }`} onClick={() => this.props.onClick()} href="/faculty-list"
-					  >
-						Faculty List
-					  </a>
-					</li>
-					
-				</ul>
-            </li>
-             <li className={`${app.includes(path) ? "mm-active" : ""}`}>
-              
-              <ul >
-                
-      
-              </ul>
-            </li>
-
-           
-            
-            <li className={`${forms.includes(path) ? "mm-active" : ""}`}>
-              <a className="has-arrow ai-icon" href="#" >
-                <i className="flaticon-381-notepad"></i>
-                <span className="nav-text forms">Publish Form</span>
               </a>
-              <ul >
-              
-                <li>
-                    <a className={`${path === "form-wizard" ? "mm-active" : ""}`} onClick={() => this.props.onClick()} href="/publish">Publish</a>
-                </li>
-             
-              </ul>
             </li>
-           
-      </MM>
+            <li className={`${app.includes(path) ? "mm-active" : ""}`}></li>
 
-			</PerfectScrollbar>
+            <li className={`${forms.includes(path) ? "mm-active" : ""}`}>
+              <Link to="/faculty-list">
+                <i className="flaticon-381-bookmark"></i>
+                <span className="nav-text">Faculty</span>
+              </Link>
+            </li>
+            <li className={`${forms.includes(path) ? "mm-active" : ""}`}>
+              <Link to="/submissions">
+                <i className="flaticon-381-success"></i>
+
+                <span className="nav-text">Submissions</span>
+              </Link>
+            </li>
+            <li className={`${forms.includes(path) ? "mm-active" : ""}`}>
+              <Link to="/publish">
+                <i className="flaticon-381-notepad"></i>
+                <span className="nav-text">Publish</span>
+              </Link>
+            </li>
+          </MM>
+        </PerfectScrollbar>
       </div>
     );
   }

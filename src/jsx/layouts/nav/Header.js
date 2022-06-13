@@ -1,97 +1,86 @@
 import React from "react";
-import  {  useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 /// Scroll
-import PerfectScrollbar from "react-perfect-scrollbar";
-import LogoutPage from './Logout';
+import LogoutPage from "./Logout";
 /// Imag
-import profile from "../../../images/profile/12.png";
-import avatar from "../../../images/avatar/1.jpg";
-import {useAuth0} from "@auth0/auth0-react";
+import { useContext } from "react";
+import { UserContext } from "../../../App";
 
+const Header = ({ onNote, toggle, onProfile, onActivity, onNotification }) => {
+  // const {user,isAuthenticated,isLoading}=useAuth0();
+  let { user, setUser } = useContext(UserContext);
 
-const Header = ({ onNote, toggle, onProfile, onActivity, onNotification}) => {
-   const {user,isAuthenticated,isLoading}=useAuth0();
-   const [rec,setrec]=useState([]);
-    const [pic,setpic]=useState("");
-    const [facname,setfacname]=useState("");
-    useEffect(()=>{
+  const [rec, setrec] = useState([]);
+  const [pic, setpic] = useState("");
+  const [facname, setfacname] = useState("");
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`/api/profiles/${user && user.email}`);
+        setrec(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-      const fetchData = async () => {
-         try {
-            const res=await axios.get(`/api/profiles/${isAuthenticated && user.email}`);
-            console.log(res.data);
-             setrec(res.data);
-         } catch (error) {
-            console.log(error);
-         }
-        };
+    fetchData();
+  }, []);
 
-         
-      
-      
-         fetchData();
-     },[]);
-     console.log("");
-   
-      
-  
+  // console.log(user);
+  // console.log(isAuthenticated);
+  // console.log(isLoading);
+  var path = window.location.pathname.split("/");
+  var name = path[path.length - 1].split("-");
+  var filterName = name.length >= 3 ? name.filter((n, i) => i > 0) : name;
+  var finalName = filterName.includes("app")
+    ? filterName.filter((f) => f !== "app")
+    : filterName.includes("ui")
+    ? filterName.filter((f) => f !== "ui")
+    : filterName.includes("uc")
+    ? filterName.filter((f) => f !== "uc")
+    : filterName.includes("basic")
+    ? filterName.filter((f) => f !== "basic")
+    : filterName.includes("form")
+    ? filterName.filter((f) => f !== "form")
+    : filterName.includes("table")
+    ? filterName.filter((f) => f !== "table")
+    : filterName.includes("page")
+    ? filterName.filter((f) => f !== "page")
+    : filterName.includes("email")
+    ? filterName.filter((f) => f !== "email")
+    : filterName.includes("ecom")
+    ? filterName.filter((f) => f !== "ecom")
+    : filterName.includes("chart")
+    ? filterName.filter((f) => f !== "chart")
+    : filterName.includes("editor")
+    ? filterName.filter((f) => f !== "editor")
+    : filterName;
 
-// console.log(user);
-// console.log(isAuthenticated);
-// console.log(isLoading);
-   var path = window.location.pathname.split("/");
-   var name = path[path.length - 1].split("-");
-   var filterName = name.length >= 3 ? name.filter((n, i) => i > 0) : name;
-   var finalName = filterName.includes("app")
-      ? filterName.filter((f) => f !== "app")
-      : filterName.includes("ui")
-      ? filterName.filter((f) => f !== "ui")
-      : filterName.includes("uc")
-      ? filterName.filter((f) => f !== "uc")
-      : filterName.includes("basic")
-      ? filterName.filter((f) => f !== "basic")
-      : filterName.includes("form")
-      ? filterName.filter((f) => f !== "form")
-      : filterName.includes("table")
-      ? filterName.filter((f) => f !== "table")
-      : filterName.includes("page")
-      ? filterName.filter((f) => f !== "page")
-      : filterName.includes("email")
-      ? filterName.filter((f) => f !== "email")
-      : filterName.includes("ecom")
-      ? filterName.filter((f) => f !== "ecom")
-      : filterName.includes("chart")
-      ? filterName.filter((f) => f !== "chart")
-      : filterName.includes("editor")
-      ? filterName.filter((f) => f !== "editor")
-      : filterName;
-	
-	var page_name = (finalName.join(" ") === '')?'Dashboard':finalName.join(" ");	
-	  
-   return (
-      <div className="header">
-         <div className="header-content">
-            <nav className="navbar navbar-expand">
-               <div className="collapse navbar-collapse justify-content-between">
-                  <div className="header-left">
-                     <div
-                        className="dashboard_bar"
-                        style={{ textTransform: "capitalize" }}
-                     >
-                        {"BMSCE ISE"}
-                     </div>
-                  </div>
+  var page_name =
+    finalName.join(" ") === "" ? "Dashboard" : finalName.join(" ");
 
-                  <ul className="navbar-nav header-right">
-                     <li className="nav-item">
+  return (
+    <div className="header">
+      <div className="header-content">
+        <nav className="navbar navbar-expand">
+          <div className="collapse navbar-collapse justify-content-between">
+            <div className="header-left">
+              <div
+                className="dashboard_bar"
+                style={{ textTransform: "capitalize" }}
+              >
+                {"BMSCE ISE"}
+              </div>
+            </div>
 
-                     </li>
-					 {isAuthenticated &&
+            <ul className="navbar-nav header-right">
+              <li className="nav-item"></li>
+              {user && (
                 <>
-                <li className="nav-item dropdown notification_dropdown">
-                        {/* <Link to ={"#"}
+                  <li className="nav-item dropdown notification_dropdown">
+                    {/* <Link to ={"#"}
                            className="nav-link  ai-icon"
                            role="button"
                            data-toggle="dropdown"
@@ -102,12 +91,12 @@ const Header = ({ onNote, toggle, onProfile, onActivity, onNotification}) => {
 							</svg>
                            <span className="badge light text-white bg-primary">12 </span>
                         </Link> */}
-                        <div
-                           className={`dropdown-menu dropdown-menu-right ${
-                              toggle === "activity" ? "show" : ""
-                           }`}
-                        >
-                           {/* <PerfectScrollbar
+                    <div
+                      className={`dropdown-menu dropdown-menu-right ${
+                        toggle === "activity" ? "show" : ""
+                      }`}
+                    >
+                      {/* <PerfectScrollbar
                               id="DZ_W_Notification1"
                               className={` widget-media dz-scroll p-3 height380 ${
                                  toggle === "activity"
@@ -216,7 +205,7 @@ const Header = ({ onNote, toggle, onProfile, onActivity, onNotification}) => {
                                  </li>
                               </ul>
                            </PerfectScrollbar> */}
-                           {/* <Link className="all-notification" to={"#"}>
+                      {/* <Link className="all-notification" to={"#"}>
                               See all notifications{" "}
                               <i className="ti-arrow-right"></i>
                            </Link>
@@ -252,7 +241,7 @@ const Header = ({ onNote, toggle, onProfile, onActivity, onNotification}) => {
                               toggle === "notification" ? "show" : ""
                            }`}
                         > */}
-                           {/* <PerfectScrollbar
+                      {/* <PerfectScrollbar
                               id="DZ_W_Gifts"
                               className={` widget-timeline dz-scroll style-1 ${
                                  toggle === "notification"
@@ -308,67 +297,62 @@ const Header = ({ onNote, toggle, onProfile, onActivity, onNotification}) => {
 								</ul>
                            </PerfectScrollbar>
                             */}
-                        </div>
-                     </li></>}
-                     {!isAuthenticated &&<div className="banner-btn">
-                        <a href="/page-login"><span>
-                        </span>Sign In / Sign Up</a></div>}
-                     <li
-                        className={`nav-item dropdown header-profile ${
-                           toggle === "profile" ? "show" : ""
-                        }`}
-                        onClick={() => onProfile()}
-                     >
-                       
-                     <Link to={"#"}
-                           className="nav-link"
-                           role="button"
-                           data-toggle="dropdown"
-                        >
-                        <div className="header-info">
-                        
-								<small>{isAuthenticated && "HELLO"}</small>
-								{isAuthenticated && <span>{isAuthenticated && rec.username}</span>}
-                           </div>
-                        {isAuthenticated && <img src={user.picture} width="20" alt="" />}
-                        </Link>
-                        <div
-                           className={`dropdown-menu dropdown-menu-right ${
-                              toggle === "profile" ? "show" : ""
-                           }`}
-                        >
-                           <a
-                             href="/app-profile"
-                              className="dropdown-item ai-icon"
-                           >
-                              <svg
-                                 id="icon-user1"
-                                 xmlns="http://www.w3.org/2000/svg"
-                                 className="text-primary"
-                                 width="18"
-                                 height="18"
-                                 viewBox="0 0 24 24"
-                                 fill="none"
-                                 stroke="currentColor"
-                                 strokeWidth="2"
-                                 strokeLinecap="round"
-                                 strokeLinejoin="round"
-                              >
-                                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                 <circle cx="12" cy="7" r="4"></circle>
-                              </svg>
-                              <span className="ml-2">Profile </span>
-                           </a>
-                           <LogoutPage />
-                        </div>
-                     </li>
-					 
-                  </ul>
-               </div>
-            </nav>
-         </div>
+                    </div>
+                  </li>
+                </>
+              )}
+              {!user && <div className="banner-btn"></div>}
+              <li
+                className={`nav-item dropdown header-profile ${
+                  toggle === "profile" ? "show" : ""
+                }`}
+                onClick={() => onProfile()}
+              >
+                <Link
+                  to={"#"}
+                  className="nav-link"
+                  role="button"
+                  data-toggle="dropdown"
+                >
+                  <div className="header-info">
+                    <small>{user && "HELLO"}</small>
+                    {user && <span>{user && rec.username}</span>}
+                  </div>
+                  {user && <img src={rec.pic} width="20" alt="" />}
+                </Link>
+                <div
+                  className={`dropdown-menu dropdown-menu-right ${
+                    toggle === "profile" ? "show" : ""
+                  }`}
+                >
+                  <Link to="/app-profile" className="dropdown-item ai-icon">
+                    <svg
+                      id="icon-user1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="text-primary"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span className="ml-2">Profile</span>
+                  </Link>
+                  <LogoutPage />
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
       </div>
-   );
+    </div>
+  );
 };
 
 export default Header;

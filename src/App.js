@@ -1,7 +1,7 @@
-import { lazy, Suspense, useEffect } from 'react';
+import { lazy, Suspense, useEffect,createContext,useState } from 'react';
 /// Components
 import Index from './jsx/index';
-
+import {app} from "./firebase"
 import { connect, useDispatch } from 'react-redux';
 import {  Route, Switch, withRouter } from 'react-router-dom';
 // action
@@ -10,7 +10,7 @@ import { isAuthenticated } from './store/selectors/AuthSelectors';
 /// Style
 import "./vendor/bootstrap-select/dist/css/bootstrap-select.min.css";
 import "./css/style.css";
-
+import firebase from "firebase";
 
 
 // const SignUp = lazy(() => import('./jsx/pages/Registration'));
@@ -24,7 +24,7 @@ const ForgotPassword = lazy(() => import('./jsx/pages/ForgotPassword'));
 // });
 
 //  <Route path='/Dashboard' component = {Dashboard}/>
-
+let UserContext = createContext();
 export default function App (props) {
     // const dispatch = useDispatch();
     // useEffect(() => {
@@ -42,9 +42,24 @@ export default function App (props) {
     //     </Switch>
     // );
     
+    let [user, setUser] = useState();
+
+  useEffect(function () {
+     app
+      .auth()
+      .onAuthStateChanged((user) => {
+        // console.log(user);
+        setUser(user);
+      });
+  }, []);
+  
+
+
+
 		return (
 			<>
-                <Suspense fallback={
+<UserContext.Provider value={{user,setUser}}>
+<Suspense fallback={
                     <div id="preloader">
                         <div className="sk-three-bounce">
                             <div className="sk-child sk-bounce1"></div>
@@ -56,6 +71,8 @@ export default function App (props) {
                 >
                     <Index />
                 </Suspense>
+</UserContext.Provider>
+               
             </>
         );
 	
@@ -78,7 +95,7 @@ export default function App (props) {
 		// );
 	
 };
-
+export {UserContext};
 // const mapStateToProps = (state) => {
 //     return {
 //         isAuthenticated: isAuthenticated(state),

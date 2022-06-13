@@ -2,18 +2,17 @@ import React, { Fragment } from "react";
 
 import Multistep from "react-multistep";
 
-import {StepOne}  from "./StepOne";
-import {StepTwo} from "./StepTwo";
-import {StepThree} from "./StepThree";
-import {StepFour} from "./StepFour";
+import { StepOne } from "./StepOne";
+import { StepTwo } from "./StepTwo";
+import { StepThree } from "./StepThree";
+import { StepFour } from "./StepFour";
 
 import PageTitle from "../../../layouts/PageTitle";
 //import { propTypes } from "react-bootstrap/esm/Image";
 
 const Wizard = () => {
- console.log("Here,in wizard");
   const steps = [
-    { name: "Personal Info", component: <StepOne  /> },
+    { name: "Personal Info", component: <StepOne /> },
     { name: "Company Info", component: <StepTwo /> },
     { name: "Business Hours", component: <StepThree /> },
     { name: "Email Setup", component: <StepFour /> },
@@ -39,10 +38,6 @@ const Wizard = () => {
     padding: "0.55em 2em",
   };
 
- 
- 
-
-
   return (
     <Fragment>
       <PageTitle activeMenu="Publish" motherMenu="Forms" />
@@ -54,8 +49,8 @@ const Wizard = () => {
               <h4 className="card-title">Form</h4>
             </div>
             <div className="card-body">
-              <form  method="POST" 
-                
+              <form
+                method="POST"
                 id="step-form-horizontal"
                 className="step-form-horizontal"
               >

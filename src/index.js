@@ -16,8 +16,8 @@ ReactDOM.render(
     domain='dev-fvk8rv7s.us.auth0.com'
     clientId='Wj0izvLwGZDagYkZHup2XQQ4QCJkSpQw'
     redirectUri={"https://securiteam.me/dashboard"}
-    // useRefreshTokens={true}
-    // cacheLocation='localstorage'
+    useRefreshTokens={true}
+    cacheLocation='localstorage'
     >
     <React.StrictMode>
         <Provider store = {store}>

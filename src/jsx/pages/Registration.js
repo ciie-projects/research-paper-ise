@@ -1,163 +1,171 @@
-import React, {useState} from "react";
+// import React, {useState} from "react";
+// import { Link } from "react-router-dom";
+// import { connect, useDispatch } from "react-redux";
+
+// import { useHistory } from "react-router-dom";
+// import axios from "axios";
+// //import cors from 'cors';
+// //import logo from '../../images/logo-full.png'
+// import { useUserAuth } from "../../userAuthContext";
+
+// function Register(props) {
+//   const [username, setUsername] = useState("");
+//   const [email, setEmail] = useState("");
+//   const { signUp }=UseuserAuth();
+//   let errorsObj = { email: "", password: "" };
+//   const [errors, setErrors] = useState(errorsObj);
+//   const [password, setPassword] = useState("");
+
+//   const handleSubmit=async(e)=>{
+//     setErrors("");
+//     e.preventDefault();
+//     try{
+//       await signUp(email,password);
+//     }
+//     catch(err){
+//      setErrors(err.message);
+//     }
+
+//   }
+
+//   return (
+//     <div className="authincation h-100 p-meddle">
+//       <div className="container h-100">
+//         <div className="row justify-content-center h-100 align-items-center">
+//           <div className="col-md-6">
+//             <div className="authincation-content">
+//               <div className="row no-gutters">
+//                 <div className="col-xl-12">
+//                   <div className="auth-form">
+//                     <h4 className="text-center mb-4 ">Sign up your account</h4>
+//                     {props.errorMessage && (
+//                       <div className="bg-red-300 text-danger border border-red-900 p-1 my-2">
+//                         {props.errorMessage}
+//                       </div>
+//                     )}
+//                     {props.successMessage && (
+//                       <div className="bg-green-300 text-danger text-green-900  p-1 my-2">
+//                         {props.successMessage}
+//                       </div>
+//                     )}
+//                     <form method="POST" onSubmit={handleSubmit}>
+
+//                       <div className="form-group">
+//                         <label className="mb-1 ">
+//                           <strong>Email</strong>
+//                         </label>
+//                         <input
+//                           type="email"
+//                           className="form-control"
+//                           value={email}
+//                           onChange={(e) => setEmail(e.target.value)}
+//                         />
+//                         {errors.email && (
+//                           <div className="text-danger fs-12">
+//                             {errors.email}
+//                           </div>
+//                         )}
+//                       </div>
+
+//                       <div className="form-group">
+//                         <label className="mb-1 ">
+//                           <strong>Password</strong>
+//                         </label>
+//                         <input
+//                           type="password"
+//                           className="form-control"
+//                           value={password}
+//                           onChange={(e) => setPassword(e.target.value)}
+//                         />
+//                       </div>
+//                       {errors.password && (
+//                         <div className="text-danger fs-12">
+//                           {errors.password}
+//                         </div>
+//                       )}
+//                       <div className="text-center mt-4">
+//                       <input type="submit" className="btn btn-primary btn-block" />
+//                       </div>
+//                     </form>
+//                     <div className="new-account mt-3 ">
+//                       <p>
+//                         Already have an account?{" "}
+//                         <Link className="text-primary" to="/login">
+//                           Sign ins
+//                         </Link>
+//                       </p>
+//                     </div>
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Register;
+
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { connect, useDispatch } from "react-redux";
+import { Form, Alert } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+import { useUserAuth } from "../../userAuthContext";
 
-import { useHistory } from "react-router-dom";
-import axios from "axios";
-//import cors from 'cors';
-//import logo from '../../images/logo-full.png'
-
-import {
-  loadingToggleAction,
-  signupAction,
-} from "../../store/actions/AuthActions";
-function Register(props) {
-  const [username, setUsername] = useState("");
+const Register = () => {
   const [email, setEmail] = useState("");
-  
-  let errorsObj = { email: "", password: "" };
-  const [errors, setErrors] = useState(errorsObj);
+  const [error, setError] = useState("");
   const [password, setPassword] = useState("");
-  const history = useHistory();
-  const dispatch = useDispatch();
-  
+  const { signUp } = useUserAuth();
+  // let navigate = useNavigate();
 
-  async function onSignUp(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    let error = false;
-    const errorObj = { ...errorsObj }; 
-
-    if (email === "") {
-      errorObj.email = "Email is Required";
-      error = true;
-    }
-    if (password === "") {
-      errorObj.password = "Password is Required";
-      error = true;
-    }
-    setErrors(errorObj);
-
-    if (error) return;
-    dispatch(loadingToggleAction(true));
-
-   
-  dispatch(signupAction(email, password, props.history));
-
- 
-  try {
-      const res = await axios.post("/api/auth/register", {
-        username,
-        email,
-        password,
-      });
-      console.log(res.data);
+    setError("");
+    try {
+      await signUp(email, password);
+      // navigate("/");
     } catch (err) {
-      console.log(err);
+      setError(err.message);
     }
-    history.push('/otpreceive');
-  } 
+  };
 
   return (
-    <div className="authincation h-100 p-meddle">
-      <div className="container h-100">
-        <div className="row justify-content-center h-100 align-items-center">
-          <div className="col-md-6">
-            <div className="authincation-content">
-              <div className="row no-gutters">
-                <div className="col-xl-12">
-                  <div className="auth-form">
-                    {/* <div className='text-center mb-3'>
-                                        <img src={logo} alt="" />
-                                    </div> */}
+    <>
+      <div className="p-4 box">
+        <h2 className="mb-3">Firebase Auth Signup</h2>
+        {error && <Alert variant="danger">{error}</Alert>}
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Control
+              type="email"
+              placeholder="Email address"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </Form.Group>
 
-                    <h4 className="text-center mb-4 ">Sign up your account</h4>
-                    {props.errorMessage && (
-                      <div className="bg-red-300 text-danger border border-red-900 p-1 my-2">
-                        {props.errorMessage}
-                      </div>
-                    )}
-                    {props.successMessage && (
-                      <div className="bg-green-300 text-danger text-green-900  p-1 my-2">
-                        {props.successMessage}
-                      </div>
-                    )}
-                    <form method="POST" >
-                      <div className="form-group">
-                        <label className="mb-1 ">
-                          <strong>Username</strong>
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          value={username}
-                          onChange={(e) => setUsername(e.target.value)}
-                          placeholder="username"
-                          name="name"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label className="mb-1 ">
-                          <strong>Email</strong>
-                        </label>
-                        <input
-                          type="email"
-                          className="form-control"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                        />
-                        {errors.email && (
-                          <div className="text-danger fs-12">
-                            {errors.email}
-                          </div>
-                        )}
-                      </div>
-                      
-                      <div className="form-group">
-                        <label className="mb-1 ">
-                          <strong>Password</strong>
-                        </label>
-                        <input
-                          type="password"
-                          className="form-control"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                        />
-                      </div>
-                      {errors.password && (
-                        <div className="text-danger fs-12">
-                          {errors.password}
-                        </div>
-                      )}
-                      <div className="text-center mt-4">
-                      <input type="submit" className="btn btn-primary btn-block" onClick={onSignUp}/>
-                      </div>
-                    </form>
-                    <div className="new-account mt-3 ">
-                      <p>
-                        Already have an account?{" "}
-                        <Link className="text-primary" to="/login"> 
-                          Sign in
-                        </Link>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Control
+              type="password"
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </Form.Group>
+
+          <div className="d-grid gap-2">
+            <Button variant="primary" type="Submit">
+              Sign up
+            </Button>
           </div>
-        </div>
+        </Form>
       </div>
-    </div>
+      <div className="p-4 box mt-3 text-center">
+        Already have an account? <Link to="/">Log In</Link>
+      </div>
+    </>
   );
-}
-
-const mapStateToProps = (state) => {
-  return {
-    errorMessage: state.auth.errorMessage,
-    successMessage: state.auth.successMessage,
-    showLoading: state.auth.showLoading,
-  };
 };
 
-export default connect(mapStateToProps)(Register);
+export default Register;
