@@ -57,18 +57,18 @@ const Home = () => {
 
   useEffect(() => {
     const getdata = async () => {
-      const res = await axios.get("api/profiles/");
+      const res = await axios.get("http://localhost:3001/api/profiles/");
       // console.log(res.data);
       var d = res.data;
       // console.log(d.length);
       setfaculties(d.length);
-      setrec(d.slice(-5, -1));
+      setrec(d);
     };
     getdata();
   }, []);
 
-  // console.log(rec);
-
+  console.log(rec[1])
+ let i =-1;
   return (
     <Fragment>
       <div className="row">
@@ -262,32 +262,34 @@ const Home = () => {
                 <p className="fs-13 mb-0"></p>
               </div>
             </div>
-            <div className="card-body p-0">
+            {!(rec.length == 0)?<div className="card-body p-0">
               <div className="table-responsive ">
                 <table className="table order-request ">
                   <tbody>
-                    <tr>
+                    { rec && rec.map((res)=>{
+                      i++;
+                      return i<5 ? <tr>
                       <td>
                         <div className="media align-items-center">
-                          <Link to={`/faculty/${user && rec[3].email}`}>
+                          <Link to={`/faculty/${user && res.email}`}>
                             <img
                               className="mr-3 img-fluid rounded-circle"
                               width="75"
-                              src={user && rec[3].pic}
-                              alt="DexignZone"
+                              src={user && res.pic}
+                              alt="img"
                             />
                           </Link>
                           <div className="media-body">
                             <h5 className="mt-0 mb-2">
                               <Link
-                                to={`/faculty/${user && rec[3].email}`}
+                                to={`/faculty/${user && res.email}`}
                                 className="text-black"
                               >
-                                {user && rec[3].username}
+                                {user && res.username}
                               </Link>
                             </h5>
                             <p className="mb-0 text-primary">
-                              {user && rec[3].email}
+                              {user && res.email}
                             </p>
                           </div>
                         </div>
@@ -301,156 +303,21 @@ const Home = () => {
                           <h4 className="mb-0 mr-3 fs-20 text-black d-inline-block">
                             ISE
                           </h4>
-                          {/* <p className="mb-0 fs-20 d-inline-block">XYZ </p> */}
                         </div>
                       </td>
-                      <td>
-                        {/* <div className="d-flex align-items-center">
-											{/* <Link to={"#"} className="btn bgl-success text-success" >PUBLISHED</Link> */}
-
-                        {/* </div> */}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div className="media align-items-center">
-                          <Link to={`/faculty/${user && rec[2].email}`}>
-                            <img
-                              className="mr-3 img-fluid rounded-circle"
-                              width="75"
-                              src={user && rec[2].pic}
-                              alt="DexignZone"
-                            />
-                          </Link>
-                          <div className="media-body">
-                            <h5 className="mt-0 mb-2">
-                              <Link
-                                to={`/faculty/${user && rec[2].email}`}
-                                className="text-black"
-                              >
-                                {user && rec[2].username}
-                              </Link>
-                            </h5>
-                            <p className="mb-0 text-primary">
-                              {user && rec[2].email}
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <h5 className="mb-2 text-black wspace-no"></h5>
-                        <p className="mb-0">BMSCE Bangalore</p>
-                      </td>
-                      <td>
-                        <div className="d-flex align-items-center justify-content-center">
-                          <h4 className="mb-0 mr-3 fs-20 text-black d-inline-block">
-                            ISE
-                          </h4>
-                          {/* <p className="mb-0 fs-20 d-inline-block">XYZ</p> */}
-                        </div>
-                      </td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          {/* <Link to={"#"} className="btn bgl-light" >CANCELED</Link> */}
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div className="media align-items-center">
-                          <Link to={`/faculty/${user && rec[1].email}`}>
-                            <img
-                              className="mr-3 img-fluid rounded-circle"
-                              width="75"
-                              src={user && rec[1].pic}
-                              alt="DexignZone"
-                            />
-                          </Link>
-                          <div className="media-body">
-                            <h5 className="mt-0 mb-2">
-                              <Link
-                                to={`/faculty/${user && rec[1].email}`}
-                                className="text-black"
-                              ></Link>
-                              {user && rec[1].username}
-                            </h5>
-                            <p className="mb-0 text-primary">
-                              {user && rec[1].email}
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <h5 className="mb-2 text-black wspace-no"></h5>
-                        <p className="mb-0">BMSCE Bangalore</p>
-                      </td>
-                      <td>
-                        <div className="d-flex align-items-center justify-content-center">
-                          <h4 className="mb-0 mr-3 fs-20 text-black d-inline-block">
-                            ISE
-                          </h4>
-                          {/* <p className="mb-0 fs-20 d-inline-block">XYZ</p> */}
-                        </div>
-                      </td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          {/* <Link to={"#"} className="btn bgl-warning text-warning" >PENDING</Link> */}
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div className="media align-items-center">
-                          <Link to={`/faculty/${user && rec[0].email}`}>
-                            <img
-                              className="mr-3 img-fluid rounded-circle"
-                              width="75"
-                              src={user && rec[0].pic}
-                              alt="DexignZone"
-                            />
-                          </Link>
-                          <div className="media-body">
-                            <h5 className="mt-0 mb-2">
-                              <Link
-                                to={`/faculty/${user && rec[0].email}`}
-                                className="text-black"
-                              >
-                                {user && rec[0].username}
-                              </Link>
-                            </h5>
-                            <p className="mb-0 text-primary">
-                              {user && rec[0].username}
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <h5 className="mb-2 text-black wspace-no"></h5>
-                        <p className="mb-0">BMSCE Bangalore</p>
-                      </td>
-                      <td>
-                        <div className="d-flex align-items-center justify-content-center">
-                          <h4 className="mb-0 mr-3 fs-20 text-black d-inline-block">
-                            ISE
-                          </h4>
-                          {/* <p className="mb-0 fs-20 d-inline-block">XYZ</p> */}
-                        </div>
-                      </td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          {/* <Link to={"#"} className="btn bgl-light" >CANCELED</Link> */}
-                        </div>
-                      </td>
-                    </tr>
+                    </tr> : <></>
+                    })
+                    }
                   </tbody>
                 </table>
                 <div className="card-footer border-0 pt-0 text-center">
-                  <Link to="/faculty" className="btn-link">
+                  <Link to="/faculty-list" className="btn-link">
                     View More &gt;&gt;
                   </Link>
                 </div>
               </div>
-            </div>
+            </div>:<p className="d-flex align-items-center justify-content-center">No submissions yet</p>}
+            
           </div>
         </div>
       </div>

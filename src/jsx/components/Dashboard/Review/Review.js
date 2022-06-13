@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import PageTitle from "../../../layouts/PageTitle";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useAuth0 } from "@auth0/auth0-react";
 import { useContext } from "react";
 import { UserContext } from "../../../../App";
 
@@ -16,7 +15,7 @@ function Review() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/api/profiles/`);
+        const res = await axios.get(`http://localhost:3001/api/profiles/`);
         // console.log(res.data);
         setinfo(res.data);
       } catch (error) {
@@ -48,7 +47,7 @@ function Review() {
                           className="mr-3 img-fluid rounded-circle"
                           width="75"
                           src={user && member.pic}
-                          alt="DexignZone"
+                          alt="img"
                         />
                       </Link>
                       <div className="card-body p-0">

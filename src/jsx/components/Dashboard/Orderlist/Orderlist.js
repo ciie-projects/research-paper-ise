@@ -259,7 +259,6 @@ import { useState, useEffect } from "react";
 import { useContext } from "react";
 import { UserContext } from "../../../../App";
 import axios from "axios";
-import { useAuth0 } from "@auth0/auth0-react";
 
 const Customerlist = () => {
   let { user, setUser } = useContext(UserContext);
@@ -272,7 +271,7 @@ const Customerlist = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/api/profiles/`);
+        const res = await axios.get(`http://localhost:3001/api/profiles/`);
         //console.log(res.data);
         setinfo(res.data);
       } catch (error) {

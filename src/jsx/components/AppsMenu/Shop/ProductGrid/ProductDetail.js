@@ -12,7 +12,6 @@ import {
   ProgressBar,
 } from "react-bootstrap";
 import PageTitle from "../../../../layouts/PageTitle";
-import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import { useEffect } from "react";
 var sub;
@@ -27,7 +26,7 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/api/profiles/${user && path}`);
+        const res = await axios.get(`http://localhost:3001/api/profiles/${user && path}`);
         setinfo(res.data);
       } catch (error) {
         console.log(error);

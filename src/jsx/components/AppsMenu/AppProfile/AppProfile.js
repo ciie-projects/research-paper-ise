@@ -358,11 +358,9 @@
 // export default AppProfile;
 
 import React, { Fragment, useEffect, useState, useContext } from "react";
-import { Button, Dropdown, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import { SRLWrapper } from "simple-react-lightbox";
 //** Import Image */
 // import profile01 from "../../../../images/profile/1.jpg";
 // import profile02 from "../../../../images/profile/2.jpg";
@@ -415,7 +413,7 @@ const AppProfile = () => {
     formData.append("name", filename);
 
     try {
-      await axios.post(`/api/profiles/${user && user.email}`, formData);
+      await axios.post(`http://localhost:3001/api/profiles/${user && user.email}`, formData);
     } catch (ex) {
       console.log("Error: " + ex);
     }
@@ -425,7 +423,7 @@ const AppProfile = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("/api/profiles/profile", {
+      const res = await axios.post("http://localhost:3001/api/profiles/profile", {
         email,
         password,
         aboutme,
@@ -440,7 +438,7 @@ const AppProfile = () => {
         data.append("name", data);
 
         try {
-          await axios.post(`/api/profiles/${user && user.email}`, data);
+          await axios.post(`http://localhost:3001/api/profiles/${user && user.email}`, data);
         } catch (err) {
           console.log(err);
         }
@@ -454,7 +452,7 @@ const AppProfile = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/api/profiles/${user && user.email}`);
+        const res = await axios.get(`http://localhost:3001/api/profiles/${user && user.email}`);
         setinfo(res.data);
       } catch (error) {
         console.log(error);
