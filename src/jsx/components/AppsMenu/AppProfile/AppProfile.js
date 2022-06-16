@@ -413,7 +413,7 @@ const AppProfile = () => {
     formData.append("name", filename);
 
     try {
-      await axios.post(`http://localhost:3001/api/profiles/${user && user.email}`, formData);
+      await axios.post(`https://securiteam.me/api/profiles/${user && user.email}`, formData);
     } catch (ex) {
       console.log("Error: " + ex);
     }
@@ -423,7 +423,7 @@ const AppProfile = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:3001/api/profiles/profile", {
+      const res = await axios.post("https://securiteam.me/api/profiles/profile", {
         email,
         password,
         aboutme,
@@ -438,7 +438,7 @@ const AppProfile = () => {
         data.append("name", data);
 
         try {
-          await axios.post(`http://localhost:3001/api/profiles/${user && user.email}`, data);
+          await axios.post(`https://securiteam.me/api/profiles/${user && user.email}`, data);
         } catch (err) {
           console.log(err);
         }
@@ -452,7 +452,7 @@ const AppProfile = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:3001/api/profiles/${user && user.email}`);
+        const res = await axios.get(`https://securiteam.me/api/profiles/${user && user.email}`);
         setinfo(res.data);
       } catch (error) {
         console.log(error);

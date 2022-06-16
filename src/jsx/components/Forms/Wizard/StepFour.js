@@ -47,7 +47,7 @@ const StepFour = (props) => {
 
   async function onSignUp(e) {
     e.preventDefault();
-    await axios.post("http://localhost:3001/api/posts/", {
+    await axios.post("https://securiteam.me/api/posts/", {
       Author,
       Publication,
       PaperTitle,

@@ -26,7 +26,7 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:3001/api/profiles/${user && path}`);
+        const res = await axios.get(`https://securiteam.me/api/profiles/${user && path}`);
         setinfo(res.data);
       } catch (error) {
         console.log(error);

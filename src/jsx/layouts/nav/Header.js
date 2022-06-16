@@ -18,7 +18,7 @@ const Header = ({ onNote, toggle, onProfile, onActivity, onNotification }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:3001/api/profiles/${user && user.email}`);
+        const res = await axios.get(`https://securiteam.me/api/profiles/${user && user.email}`);
         setrec(res.data);
       } catch (error) {
         console.log(error);

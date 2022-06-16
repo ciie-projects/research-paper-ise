@@ -57,7 +57,7 @@ const Home = () => {
 
   useEffect(() => {
     const getdata = async () => {
-      const res = await axios.get("http://localhost:3001/api/profiles/");
+      const res = await axios.get("https://securiteam.me/api/profiles/");
       // console.log(res.data);
       var d = res.data;
       // console.log(d.length);
