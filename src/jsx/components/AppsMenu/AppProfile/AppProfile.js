@@ -443,7 +443,7 @@ const AppProfile = () => {
           console.log(err);
         }
       }
-      window.location.replace("https://securiteam.me/faculty-list");
+      window.location.replace("/faculty-list");
     } catch (err) {
       console.log(err);
     }
