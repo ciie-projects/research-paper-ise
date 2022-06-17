@@ -7,17 +7,20 @@ var Author, Publication, TItle, If, Doi;
 
 const StepOne = (props) => {
   const [publicaton, setpublication] = useState("Type of Publication");
-
+  const [type,settype]=useState("Type of Publication");
   const handlebook = () => {
     setpublication("Book chapter");
+    settype("Book chapter");
   };
 
   const handleCon = () => {
     setpublication("Conference paper");
+    settype("Conference paper");
   };
 
   const handleJournals = () => {
     setpublication("Journal");
+    settype("Journal");
   };
 
   const [author, setAuthor] = useState("");
@@ -55,7 +58,7 @@ const StepOne = (props) => {
           type="button"
           className="btn border btn-rounded text-black dropdown-toggle"
         >
-          Type of Publication
+          {type}
         </Dropdown.Toggle>
         <Dropdown.Menu className="dropdown-menu">
           <Dropdown.Item className="dropdown-item" onClick={handleJournals}>

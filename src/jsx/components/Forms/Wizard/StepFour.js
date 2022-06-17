@@ -79,8 +79,8 @@ const StepFour = (props) => {
               </div>
               <div className="card-body">
                 <div className="summernote">
-                  <input
-                    type="text"
+                  <textarea
+                    // type="textarea"
                     className="form-control"
                     value={description}
                     name="description"

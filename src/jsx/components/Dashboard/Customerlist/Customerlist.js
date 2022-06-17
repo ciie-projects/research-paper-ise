@@ -281,7 +281,7 @@ const Customerlist = () => {
   };
   return (
     <Fragment>
-      <PageTitle activeMenu="Faculty List" motherMenu="Dashboard" />
+      <PageTitle activeMenu="Submissions" motherMenu="Dashboard" />
 
       <div className="row">
         <div className="col-xl-12">

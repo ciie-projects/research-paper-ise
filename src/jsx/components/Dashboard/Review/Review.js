@@ -30,7 +30,7 @@ function Review() {
   }, []);
   return (
     <>
-      <PageTitle activeMenu="Submissions" motherMenu="Dashboard" />
+      <PageTitle activeMenu="Faculty" motherMenu="Dashboard" />
 
       <Fragment>
         <div className="form-head d-flex mb-3 mb-lg-5 align-items-start"></div>
