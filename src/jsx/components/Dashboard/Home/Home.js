@@ -1,15 +1,15 @@
 import React, { Fragment, useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Dropdown } from "react-bootstrap";
-import { Tab, Nav } from "react-bootstrap";
+// import { Dropdown } from "react-bootstrap";
+// import { Tab, Nav } from "react-bootstrap";
 //** Import Image */
 
 import { Sparklines, SparklinesLine } from "react-sparklines";
-import Apexspline from "./Apexspline";
+// import Apexspline from "./Apexspline";
 import ApexchartsNegPost from "./ApexNagetivePosative";
 import ApexchartsNegPost1 from "./ApexNagetivePosative1";
 import axios from "axios";
-import { useAuth0 } from "@auth0/auth0-react";
+// import { useAuth0 } from "@auth0/auth0-react";
 import { UserContext } from "../../../../App";
 
 const sampleData1 = [
@@ -67,7 +67,6 @@ const Home = () => {
     getdata();
   }, []);
 
-  console.log(rec[1])
  let i =-1;
   return (
     <Fragment>
@@ -122,7 +121,7 @@ const Home = () => {
                 <h2 className="text-black">
                   785 <span className="text-success fs-14"></span>
                 </h2>
-                <p className="mb-0 text-black">No of submissions</p>
+                <p className="mb-0 text-black">Journals</p>
               </div>
               <svg
                 width="32"
@@ -165,7 +164,7 @@ const Home = () => {
                 <h2 className="text-black">
                   56 <span className="text-danger fs-14"></span>
                 </h2>
-                <p className="mb-0 text-black">Journals</p>
+                <p className="mb-0 text-black">Conference papers</p>
               </div>
               <svg
                 width="32"
@@ -204,7 +203,7 @@ const Home = () => {
                 <h2 className="text-black">
                   62 <span className="text-danger fs-14"></span>
                 </h2>
-                <p className="mb-0 text-black">PHD's</p>
+                <p className="mb-0 text-black">Book chapters</p>
               </div>
               <svg
                 width="20"

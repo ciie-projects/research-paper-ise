@@ -443,7 +443,7 @@ const AppProfile = () => {
           console.log(err);
         }
       }
-      window.location.replace("/faculty-list");
+      window.location.replace("https://ise.ciie.bmsedu.in/faculty-list");
     } catch (err) {
       console.log(err);
     }

@@ -2,15 +2,15 @@ import { lazy, Suspense, useEffect,createContext,useState } from 'react';
 /// Components
 import Index from './jsx/index';
 import {app} from "./firebase"
-import { connect, useDispatch } from 'react-redux';
-import {  Route, Switch, withRouter } from 'react-router-dom';
+// import { connect, useDispatch } from 'react-redux';
+// import {  Route, Switch, withRouter } from 'react-router-dom';
 // action
-import { checkAutoLogin } from './services/AuthService';
-import { isAuthenticated } from './store/selectors/AuthSelectors';
+// import { checkAutoLogin } from './services/AuthService';
+// import { isAuthenticated } from './store/selectors/AuthSelectors';
 /// Style
 import "./vendor/bootstrap-select/dist/css/bootstrap-select.min.css";
 import "./css/style.css";
-import firebase from "firebase";
+// import firebase from "firebase";
 
 
 // const SignUp = lazy(() => import('./jsx/pages/Registration'));
