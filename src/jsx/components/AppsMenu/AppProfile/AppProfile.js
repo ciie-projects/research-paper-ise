@@ -408,12 +408,15 @@ const AppProfile = () => {
     setFileName(e.target.files[0].name);
   };
   const uploadFile = async (e) => {
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("name", filename);
+    const data = new FormData();
+    data.append("file", file);
+    data.append("name", filename);
 
     try {
-      await axios.post(`https://securiteam.me/api/profiles/${user && user.email}`, formData);
+      await axios.post(
+        `http://localhost:3001/api/profiles/${user && user.email}`,
+        data
+      );
     } catch (ex) {
       console.log("Error: " + ex);
     }
@@ -423,27 +426,34 @@ const AppProfile = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("https://securiteam.me/api/profiles/profile", {
-        email,
-        password,
-        aboutme,
-        researchInt,
-        desgination,
-        experience,
-        username,
-      });
-      if (file) {
-        const data = Date.now() + file.name;
-        data.append("file", file);
-        data.append("name", data);
-
-        try {
-          await axios.post(`https://securiteam.me/api/profiles/${user && user.email}`, data);
-        } catch (err) {
-          console.log(err);
+      const res = await axios.post(
+        "http://localhost:3001/api/profiles/profile",
+        {
+          email,
+          password,
+          aboutme,
+          researchInt,
+          desgination,
+          experience,
+          username,
         }
-      }
-      window.location.replace("https://ise.ciie.bmsedu.in/faculty-list");
+      );
+      // if (file) {
+      //   const data = Date.now() + file.name;
+      //   data.append("file", file);
+      //   data.append("name", data);
+      //   console.log(data)
+      //   try {
+          
+      //     await axios.post(
+      //       `http://localhost:3001/api/profiles/${user && user.email}`,
+      //       data
+      //     );
+      //   } catch (err) {
+      //     console.log(err);
+      //   }
+      // }
+      window.location.replace("http://localhost:3000/faculty-list");
     } catch (err) {
       console.log(err);
     }
@@ -452,7 +462,9 @@ const AppProfile = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`https://securiteam.me/api/profiles/${user && user.email}`);
+        const res = await axios.get(
+          `http://localhost:3001/api/profiles/${user && user.email}`
+        );
         setinfo(res.data);
       } catch (error) {
         console.log(error);
@@ -512,6 +524,7 @@ const AppProfile = () => {
         type="file"
         onChange={saveFile}
         style={{ "padding-top": "0.75rem" }}
+        name="data"
       />
       <button
         className="btn btn-primary"

@@ -232,7 +232,7 @@ const Customerlist = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`https://securiteam.me/api/profiles/`);
+        const res = await axios.get(`http://localhost:3001/api/profiles/`);
         //console.log(res.data);
         setinfo(res.data);
       } catch (error) {
