@@ -9,18 +9,21 @@ const StepOne = (props) => {
   const [publicaton, setpublication] = useState("Type of Publication");
   const [type,settype]=useState("Type of Publication");
   const handlebook = () => {
-    setpublication("Book chapter");
+    setpublication("Bookchapter");
     settype("Book chapter");
+    setPublication("Bookchapter");
   };
 
   const handleCon = () => {
-    setpublication("Conference paper");
+    setpublication("Conferencepaper");
     settype("Conference paper");
+    setPublication("Conferencepaper");
   };
 
   const handleJournals = () => {
     setpublication("Journal");
     settype("Journal");
+    setPublication("Journal");
   };
 
   const [author, setAuthor] = useState("");
@@ -101,7 +104,7 @@ const StepOne = (props) => {
             />
           </div>
         </div>
-        <div className="col-lg-12 mb-2">
+        {/* <div className="col-lg-12 mb-2">
           <div className="form-group">
             <label className="text-label">{publicaton}*</label>
             <input
@@ -116,7 +119,7 @@ const StepOne = (props) => {
               required
             />
           </div>
-        </div>
+        </div> */}
         <div className="col-lg-12 mb-2">
           <div className="form-group">
             <label className="text-label">IF*</label>

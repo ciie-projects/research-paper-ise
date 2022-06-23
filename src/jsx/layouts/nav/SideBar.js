@@ -164,7 +164,7 @@ class SideBar extends Component {
             <li className={`${forms.includes(path) ? "mm-active" : ""}`}>
               <Link to="/faculty-list">
                 <i className="flaticon-381-bookmark"></i>
-                <span className="nav-text">Faculty</span>
+                <span className="nav-text">Faculty List</span>
               </Link>
             </li>
             <li className={`${forms.includes(path) ? "mm-active" : ""}`}>
@@ -177,7 +177,7 @@ class SideBar extends Component {
             <li className={`${forms.includes(path) ? "mm-active" : ""}`}>
               <Link to="/publish">
                 <i className="flaticon-381-notepad"></i>
-                <span className="nav-text">Publish</span>
+                <span className="nav-text">Publish Now</span>
               </Link>
             </li>
           </MM>

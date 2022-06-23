@@ -23,9 +23,7 @@ function Review() {
       }
     };
 
-    // console.log(info);
-    // console.log(user && info[0].email);
-    // console.log(user && info[0].experience);
+
     fetchData();
   }, []);
   return (
@@ -41,13 +39,14 @@ function Review() {
                 <div className="row align-items-center p-4  border-bottom">
                   <div className="col-xl-4 col-xxl-4 col-lg-5 col-md-12">
                     <div className="media align-items-center">
-                      <div className="custom-control custom-checkbox mr-4"></div>
+                      {/* <div className="custom-control custom-checkbox mr-4"></div> */}
                       <Link to={`/faculty/${user && member.email}`}>
                         <img
                           className="mr-3 img-fluid rounded-circle"
-                          width="75"
+                          width="70"
                           src={user && member.pic}
                           alt="img"
+                          style={{"width":"4rem","height":"4rem"}}
                         />
                       </Link>
                       <div className="card-body p-0">
