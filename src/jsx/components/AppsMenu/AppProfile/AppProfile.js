@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
-
-
 import PageTitle from "../../../layouts/PageTitle";
 
 import { UserContext } from "../../../../App";
@@ -17,9 +15,8 @@ const AppProfile = () => {
   const [postModal, setPostModal] = useState(false);
   const [cameraModal, setCameraModal] = useState(false);
   const [linkModal, setLinkModal] = useState(false);
-
   const [replayModal, setReplayModal] = useState(false);
-  const [email, setemail] = useState("");
+  const [userMail, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [aboutme, setaboutme] = useState("");
   const [researchInt, setresearchInt] = useState("");
@@ -49,20 +46,18 @@ const AppProfile = () => {
   
     try {
       await axios.post(`/api/profiles/${user && user.email}`, formData);
-     
     } catch (ex) {
-    
       console.log("Error: " + ex);
     }
- 
   };
 
   async function onSave(e) {
     e.preventDefault();
+    setemail(user && user.email);
 
     try {
-      const res = await axios.post("/api/profiles/profile", {
-        email,
+      const res = await axios.put("/api/profiles/edit", {
+        userMail,
         password,
         aboutme,
         researchInt,
@@ -76,8 +71,7 @@ const AppProfile = () => {
         const data = Date.now() + file.name;
         data.append("file", file);
         data.append("name", data);
-       
-     
+
         try {
           console.log("INSIDE #");
           await axios.post(`/api/profiles/${user && user.email}`, data);
@@ -99,6 +93,11 @@ const AppProfile = () => {
         const res = await axios.get(`/api/profiles/${user && user.email}`);
         console.log(res.data);
         setinfo(res.data);
+        setaboutme(info.aboutme);
+        setresearchInt(info.researchInt);
+        setdesignation(info.desgination);
+        setusername(info.username);
+        setexperience(info.experience);
       } catch (error) {
         console.log(error);
       }
@@ -107,7 +106,7 @@ const AppProfile = () => {
     console.log(info.pic);
 
     fetchData();
-  }, []);
+  });
 
   return (
     <Fragment>
@@ -120,15 +119,20 @@ const AppProfile = () => {
               <div className="profile-info">
                 <div className="profile-photo rounded-circle">
                   <center>
-				  <img
-                    src={user && info.pic}
-                    className="img-fluid rounded-circle"
-                    alt="profile"
-					style={{"marginTop":"2rem","objectFit":" contain","height":"7rem","width":"6rem"}}
-                  />
-				  </center>
+                    <img
+                      src={user && info.pic}
+                      className="img-fluid rounded-circle"
+                      alt="profile"
+                      style={{
+                        marginTop: "2rem",
+                        objectFit: " contain",
+                        height: "7rem",
+                        width: "6rem",
+                      }}
+                    />
+                  </center>
                 </div>
-				
+
                 <div className="profile-details">
                   <div className="profile-name px-3 pt-2">
                     <h4 className="text-primary mb-0">
@@ -146,23 +150,23 @@ const AppProfile = () => {
           </div>
         </div>
       </div>
-	  <div className="form-group ">
-                    <br></br>
-                    <br></br>
-                    <h4 className="text-primary">Update Profile Picture</h4>
-                    <input
-                      className="form-control col-lg-9 mb-2"
-                      type="file"
-                      onChange={saveFile}
-                      name="data"
-					  style={{"padding":"0.75rem"}}
-                    />
-                    <button className="btn btn-primary" onClick={uploadFile}>
-                      Upload
-                    </button>
-                    <br></br>
-                    <br></br>
-                  </div>
+      <div className="form-group ">
+        <br></br>
+        <br></br>
+        <h4 className="text-primary">Update Profile Picture</h4>
+        <input
+          className="form-control col-lg-9 mb-2"
+          type="file"
+          onChange={saveFile}
+          name="data"
+          style={{ padding: "0.75rem" }}
+        />
+        <button className="btn btn-primary" onClick={uploadFile}>
+          Upload
+        </button>
+        <br></br>
+        <br></br>
+      </div>
       <div className="row">
         <div className="col-xl-4">
           <div className="row"></div>
@@ -196,7 +200,7 @@ const AppProfile = () => {
                           activeToggle === "setting" ? "active show" : ""
                         }`}
                       >
-                        Setting
+                        Edit
                       </Link>
                     </li>
                   </ul>
@@ -213,7 +217,7 @@ const AppProfile = () => {
                           <p className="mb-2">{user && info.aboutme}</p>
                         </div>
                       </div>
-                  
+
                       <div className="profile-lang  mb-5">
                         <h4 className="text-primary mb-2">Research Interest</h4>
                         <Link
@@ -223,7 +227,6 @@ const AppProfile = () => {
                           <i className="flag-icon flag-icon-us" />
                           {user && info.researchInt}
                         </Link>
-                       
                       </div>
                       <div className="profile-personal-info">
                         <h4 className="text-primary mb-4">
@@ -269,7 +272,7 @@ const AppProfile = () => {
                             </h5>
                           </div>
                           <div className="col-9">
-                            <span>10</span>
+                            <span>{user && info.work}</span>
                           </div>
                         </div>
                         <div className="row mb-2">
@@ -281,7 +284,7 @@ const AppProfile = () => {
                           </div>
                           <div className="col-9">
                             <span>
-                              {user && info.experience} Year Experiences
+                              {user && info.experience}
                             </span>
                           </div>
                         </div>
@@ -297,7 +300,7 @@ const AppProfile = () => {
                         <div className="settings-form">
                           <h4 className="text-primary">Account Setting</h4>
                           <form onSubmit={onSave}>
-                            <div className="form-row">
+                            {/* <div className="form-row">
                               <div className="form-group col-md-6">
                                 <label>Email</label>
                                 <input
@@ -318,7 +321,17 @@ const AppProfile = () => {
                                   className="form-control"
                                 />
                               </div>
-                            </div>
+                            </div> */}
+                          <div className="form-group">
+                                <label>Name</label>
+                                <input
+                                  type="text"
+                                  placeholder=""
+                                  value={username}
+                                  onChange={(e) => setusername(e.target.value)}
+                                  className="form-control"
+                                />
+                              </div>
                             <div className="form-group">
                               <label>About Me</label>
                               <input

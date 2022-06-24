@@ -20,8 +20,15 @@ const Customerlist = () => {
     const fetchData = async () => {
       try {
         const res = await axios.get(`http://localhost:3001/api/profiles/`);
-        //console.log(res.data);
+        //console.log(res.data[0].work);
         setinfo(res.data);
+        res.data.map((objres)=>{
+          objres.work.map((workres)=>{
+            arr.push(workres)
+          })
+          // setarr(objres.work)
+        })
+        console.log(arr);
       } catch (error) {
         console.log(error);
       }
@@ -30,15 +37,15 @@ const Customerlist = () => {
 
     fetchData();
     // console.log(info);
-    var i;
-    for (i = 0; i < info.length; i++) {
-      // eslint-disable-next-line no-unused-expressions
-      if (info[i].work != 0) {
-        arr[i] = info[i].work;
-        sun[i] = info[i].work;
-      }
-    }
-  });
+    // var i;
+    // for (i = 0; i < info.length; i++) {
+    //   // eslint-disable-next-line no-unused-expressions
+    //   if (info[i].work != 0) {
+    //     arr[i] = info[i].work;
+    //     sun[i] = info[i].work;
+    //   }
+    // }
+  },[]);
 
   const data = {
     columns: [

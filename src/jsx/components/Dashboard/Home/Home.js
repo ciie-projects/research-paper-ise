@@ -54,7 +54,7 @@ const Home = () => {
   const [rec, setrec] = useState([]);
   const [submissions, setsubmissions] = useState(0);
   const [faculties, setfaculties] = useState(0);
-
+   const [count,setcount]=useState([]);
   useEffect(() => {
     const getdata = async () => {
       const res = await axios.get("http://localhost:3001/api/profiles/");
@@ -66,6 +66,15 @@ const Home = () => {
     };
     getdata();
   }, []);
+
+  useEffect(()=>{
+   const Countdata=async()=>{
+    const response=await axios.get("https://securiteam.me/api/count");
+    console.log(response.data[0]);
+    setcount(response.data[0]);
+   };
+   Countdata();
+  },[]);
 
   let i = -1;
   return (
@@ -119,7 +128,7 @@ const Home = () => {
             <div className="card-header media border-0 pb-0">
               <div className="media-body">
                 <h2 className="text-black">
-                  785 <span className="text-success fs-14"></span>
+                {user && count.journal} <span className="text-success fs-14"></span>
                 </h2>
                 <p className="mb-0 text-black">Journals</p>
               </div>
@@ -162,7 +171,7 @@ const Home = () => {
             <div className="card-header media border-0 pb-0">
               <div className="media-body">
                 <h2 className="text-black">
-                  56 <span className="text-danger fs-14"></span>
+                {user && count.conference} <span className="text-danger fs-14"></span>
                 </h2>
                 <p className="mb-0 text-black">Conference papers</p>
               </div>
@@ -201,7 +210,7 @@ const Home = () => {
             <div className="card-header media border-0 pb-0">
               <div className="media-body">
                 <h2 className="text-black">
-                  62 <span className="text-danger fs-14"></span>
+                  {user && count.bookchapter} <span className="text-danger fs-14"></span>
                 </h2>
                 <p className="mb-0 text-black">Book chapters</p>
               </div>
@@ -249,7 +258,7 @@ const Home = () => {
                 fill="white"
               />
             </svg>
-            PUBLISH
+            PUBLISH NOW
           </Link>
         </div>
 
