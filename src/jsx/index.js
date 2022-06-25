@@ -181,7 +181,7 @@ const Markup = () => {
     { url: "ecom-product-grid", component: ProductGrid },
     { url: "ecom-product-list", component: ProductList },
     // { url: 'ecom-product-detail', component: ProductDetail },
-    { url: "faculty/:email", component: user ? ProductDetail : Login },
+    { url: "faculty/:email", component:ProductDetail },
     { url: "ecom-product-order", component: ProductOrder },
     { url: "ecom-checkout", component: Checkout },
     { url: "ecom-invoice", component: Invoice },

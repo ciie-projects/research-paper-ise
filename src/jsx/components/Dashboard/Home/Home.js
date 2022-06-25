@@ -51,30 +51,62 @@ const tabData = [
 const Home = () => {
   // const {isAuthenticated,isLoading}=useAuth0();
   let { user, setUser } = useContext(UserContext);
+  console.log(user);
   const [rec, setrec] = useState([]);
   const [submissions, setsubmissions] = useState(0);
   const [faculties, setfaculties] = useState(0);
-   const [count,setcount]=useState([]);
-  useEffect(() => {
-    const getdata = async () => {
+  const [count, setcount] = useState([]);
+  const [email, setemail] = useState("");
+  const [username, setusername] = useState("");
+  // console.log(email + username);
+  const getprofile = async () => {
+    setemail(user && user.email);
+    setusername(user && user.displayName);
+       try {
+         const res = await axios
+           .post("http://localhost:3001/api/profiles/profile/", {
+             email,
+             username,
+           })
+           .then((res) => {
+             console.log(res);
+           });
+       } catch (err) {
+         console.log(err);
+       }
+     };
+     const getdata = async () => {
       const res = await axios.get("http://localhost:3001/api/profiles/");
-      // console.log(res.data);
       var d = res.data;
-      // console.log(d.length);
       setfaculties(d.length);
       setrec(d);
     };
-    getdata();
-  }, []);
+    const Countdata = async () => {
+      const response = await axios.get("http://localhost:3001/api/count");
+      setcount(response.data[0]);
+    };
 
-  useEffect(()=>{
-   const Countdata=async()=>{
-    const response=await axios.get("https://securiteam.me/api/count");
-    console.log(response.data[0]);
-    setcount(response.data[0]);
-   };
-   Countdata();
+  useEffect(() => {
+    Countdata();
+        getdata();
+        getprofile();
   },[]);
+
+  // useEffect(async()=>{
+   
+    
+        
+ 
+ 
+
+   
+
+  // },[]);
+
+  // useEffect(async()=>{
+
+  // })
+
 
   let i = -1;
   return (
@@ -128,7 +160,8 @@ const Home = () => {
             <div className="card-header media border-0 pb-0">
               <div className="media-body">
                 <h2 className="text-black">
-                {user && count.journal} <span className="text-success fs-14"></span>
+                  {user && count.journal}{" "}
+                  <span className="text-success fs-14"></span>
                 </h2>
                 <p className="mb-0 text-black">Journals</p>
               </div>
@@ -171,7 +204,8 @@ const Home = () => {
             <div className="card-header media border-0 pb-0">
               <div className="media-body">
                 <h2 className="text-black">
-                {user && count.conference} <span className="text-danger fs-14"></span>
+                  {user && count.conference}{" "}
+                  <span className="text-danger fs-14"></span>
                 </h2>
                 <p className="mb-0 text-black">Conference papers</p>
               </div>
@@ -210,7 +244,8 @@ const Home = () => {
             <div className="card-header media border-0 pb-0">
               <div className="media-body">
                 <h2 className="text-black">
-                  {user && count.bookchapter} <span className="text-danger fs-14"></span>
+                  {user && count.bookchapter}{" "}
+                  <span className="text-danger fs-14"></span>
                 </h2>
                 <p className="mb-0 text-black">Book chapters</p>
               </div>
@@ -299,23 +334,25 @@ const Home = () => {
                                         {user && res.username}
                                       </Link>
                                     </h5>
-                                    <p className="mb-0 text-primary">
-                                      {user && res.email}
-                                    </p>
                                   </div>
                                 </div>
                               </td>
                               <td>
-                                <h5 className="mb-2 text-black wspace-no"></h5>
-                                <p className="mb-0">BMSCE Bangalore</p>
+                              <p className="mb-0 text-primary">
+                                      {user && res.email}
+                                    </p>
                               </td>
-                              <td>
+                              {/* <td> */}
+                                {/* <h5 className="mb-2 text-black wspace-no"></h5> */}
+                                {/* <p className="mb-0">BMSCE Bangalore</p>
+                              </td> */}
+                              {/* <td>
                                 <div className="d-flex align-items-center justify-content-center">
                                   <h4 className="mb-0 mr-3 fs-20 text-black d-inline-block">
                                     ISE
                                   </h4>
                                 </div>
-                              </td>
+                              </td> */}
                             </tr>
                           ) : (
                             <></>
@@ -324,7 +361,7 @@ const Home = () => {
                     </tbody>
                   </table>
                   <div className="card-footer border-0 pt-0 text-center">
-                    <Link to="/faculty-list" className="btn-link">
+                    <Link to={"/faculty-list"} className="btn-link">
                       View More &gt;&gt;
                     </Link>
                   </div>

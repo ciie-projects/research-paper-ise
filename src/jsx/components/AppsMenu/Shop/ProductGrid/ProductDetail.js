@@ -17,6 +17,7 @@ import { useEffect } from "react";
 var sub;
 const ProductDetail = () => {
   let { user, setUser } = useContext(UserContext);
+  console.log(user);
   const location = useLocation();
   const path = location.pathname.split("/")[2];
   // const {user,isAuthenticated,isLoading}=useAuth0();
@@ -30,13 +31,14 @@ const ProductDetail = () => {
           `http://localhost:3001/api/profiles/${user && path}`
         );
         setinfo(res.data);
+        console.log(info);
       } catch (error) {
         console.log(error);
       }
     };
     sub = info.work;
     fetchData();
-  }, []);
+  });
 
   const toggle = (tab) => {
     if (activeTab !== tab) setActiveTab(tab);

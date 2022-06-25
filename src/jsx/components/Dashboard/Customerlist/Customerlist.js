@@ -45,7 +45,7 @@ const Customerlist = () => {
     //     sun[i] = info[i].work;
     //   }
     // }
-  },[]);
+  },[arr]);
 
   const data = {
     columns: [

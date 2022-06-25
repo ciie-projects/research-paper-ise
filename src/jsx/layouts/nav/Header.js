@@ -83,7 +83,7 @@ const Header = ({ onNote, toggle, onProfile, onActivity, onNotification }) => {
               </div>
             </div>
 
-            <ul className="navbar-nav header-right">
+            <ul className="navbar-nav header-right" style={{"position":"relative","top":"0rem","margin":"0"}}>
               <li className="nav-item"></li>
               {user && (
                 <>
@@ -112,7 +112,7 @@ const Header = ({ onNote, toggle, onProfile, onActivity, onNotification }) => {
                   role="button"
                   data-toggle="dropdown"
                 >
-                  <div className="header-info">
+                  <div className="header-info" >
                     <small>{user && "HELLO"}</small>
                     {user && <span>{ facname}</span>}
                   </div>

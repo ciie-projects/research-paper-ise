@@ -16,7 +16,7 @@ const AppProfile = () => {
   const [cameraModal, setCameraModal] = useState(false);
   const [linkModal, setLinkModal] = useState(false);
   const [replayModal, setReplayModal] = useState(false);
-  const [userMail, setemail] = useState("");
+  const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [aboutme, setaboutme] = useState("");
   const [researchInt, setresearchInt] = useState("");
@@ -30,12 +30,11 @@ const AppProfile = () => {
   // const [filE, setFile] = useState();
   const [file, setfile] = useState(null);
   const [filename, setFileName] = useState("");
+  let about;
 
-  console.log("profile here" + user);
   // console.log(user.email);
 
   const saveFile = (e) => {
-    console.log("Inisde save");
     setfile(e.target.files[0]);
     setFileName(e.target.files[0].name);
   };
@@ -43,9 +42,9 @@ const AppProfile = () => {
     const formData = new FormData();
     formData.append("data", file);
     formData.append("name", filename);
-  
+
     try {
-      await axios.post(`/api/profiles/${user && user.email}`, formData);
+      await axios.post(`http://localhost:3001/api/profiles/${user && user.email}`, formData);
     } catch (ex) {
       console.log("Error: " + ex);
     }
@@ -56,15 +55,21 @@ const AppProfile = () => {
     setemail(user && user.email);
 
     try {
-      const res = await axios.put("/api/profiles/edit", {
-        userMail,
-        password,
-        aboutme,
-        researchInt,
-        desgination,
-        experience,
-        username,
-      });
+      const res = await axios
+        .put("http://localhost:3001/api/profiles/edit", {
+          email,
+          aboutme,
+          researchInt,
+          desgination,
+          experience,
+          username,
+        })
+        .then((res) => {
+          console.log(res);
+          if (res.status == 200) {
+            alert("profile updated");
+          }
+        });
       if (file) {
         // const data=new FormData();
         // console.log(data);
@@ -73,15 +78,20 @@ const AppProfile = () => {
         data.append("name", data);
 
         try {
-          console.log("INSIDE #");
-          await axios.post(`/api/profiles/${user && user.email}`, data);
-          console.log("Done");
+          await axios
+            .post(`http://localhost:3001/api/profiles/${user && user.email}`, data)
+            .then((res) => {
+              console.log(res.status);
+              if (res.status == 200) {
+                alert("profile pic updated");
+              }
+            });
         } catch (err) {
           console.log(err);
         }
       }
       console.log(res.data);
-      window.location.replace("http://localhost:3000/faculty");
+      window.location.replace("http://localhost:3000/faculty-list");
     } catch (err) {
       console.log(err);
     }
@@ -90,24 +100,16 @@ const AppProfile = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/api/profiles/${user && user.email}`);
-        console.log(res.data);
+        const res = await axios.get(`http://localhost:3001/api/profiles/${user && user.email}`);
+        // console.log(res.data);
         setinfo(res.data);
-        setaboutme(info.aboutme);
-        setresearchInt(info.researchInt);
-        setdesignation(info.desgination);
-        setusername(info.username);
-        setexperience(info.experience);
       } catch (error) {
         console.log(error);
       }
     };
 
-    console.log(info.pic);
-
     fetchData();
   });
-
   return (
     <Fragment>
       <PageTitle activeMenu="Profile" motherMenu="App" />
@@ -283,9 +285,7 @@ const AppProfile = () => {
                             </h5>
                           </div>
                           <div className="col-9">
-                            <span>
-                              {user && info.experience}
-                            </span>
+                            <span>{user && info.experience}</span>
                           </div>
                         </div>
                       </div>
@@ -322,22 +322,22 @@ const AppProfile = () => {
                                 />
                               </div>
                             </div> */}
-                          <div className="form-group">
-                                <label>Name</label>
-                                <input
-                                  type="text"
-                                  placeholder=""
-                                  value={username}
-                                  onChange={(e) => setusername(e.target.value)}
-                                  className="form-control"
-                                />
-                              </div>
+                            <div className="form-group">
+                              <label>Name</label>
+                              <input
+                                type="text"
+                                placeholder={info.username}
+                                value={username}
+                                onChange={(e) => setusername(e.target.value)}
+                                className="form-control"
+                              />
+                            </div>
                             <div className="form-group">
                               <label>About Me</label>
                               <input
                                 type="text"
-                                placeholder=""
-                                value={aboutme}
+                                placeholder={info.aboutme}
+                                value={about}
                                 onChange={(e) => setaboutme(e.target.value)}
                                 className="form-control"
                               />
@@ -346,7 +346,7 @@ const AppProfile = () => {
                               <label>Research Intersets</label>
                               <input
                                 type="text"
-                                placeholder=" "
+                                placeholder={info.researchInt}
                                 value={researchInt}
                                 onChange={(e) => setresearchInt(e.target.value)}
                                 className="form-control"
@@ -357,7 +357,7 @@ const AppProfile = () => {
                               <label>Designation</label>
                               <input
                                 type="text"
-                                placeholder=" "
+                                placeholder={info.desgination}
                                 value={desgination}
                                 onChange={(e) => setdesignation(e.target.value)}
                                 className="form-control"
@@ -367,7 +367,7 @@ const AppProfile = () => {
                               <label>Years of Experience</label>
                               <input
                                 type="text"
-                                placeholder=" "
+                                placeholder={info.experience}
                                 value={experience}
                                 onChange={(e) => setexperience(e.target.value)}
                                 className="form-control"
