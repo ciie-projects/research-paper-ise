@@ -20,6 +20,7 @@ import Orderlist from "./components/Dashboard/Orderlist/Orderlist";
 import Customerlist from "./components/Dashboard/Customerlist/Customerlist";
 import Task from "./components/Dashboard/Task";
 import Frontpage from "./components/Dashboard/front-page/Front-page";
+import LandingPage from "./components/Dashboard/landing-page/landing";
 
 /// App
 import AppProfile from "./components/AppsMenu/AppProfile/AppProfile";
@@ -122,6 +123,7 @@ const Markup = () => {
     /// Dashboard
     // { url: "", component: Home },
     { url: "dashboard", component: Home },
+    {url:"page-landing",component:LandingPage},
     { url: "companies", component: Companies },
     { url: "analytics", component: Analytics },
     { url: "faculty-list", component: user ? Review : Frontpage },
