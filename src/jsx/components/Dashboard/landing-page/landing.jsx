@@ -22,43 +22,61 @@ export default function LandingPage() {
       <header className="header-style-1"> 
 
 
-<div className="header-navbar navbar-sticky">
-    <div className="container">
-        <div className="d-flex align-items-center justify-content-between">
+<div className="header-navbar navbar-sticky" id="login" >
+    <div className="container" >
+        <div className="d-flex align-items-center justify-content-between" style={{"height":"3rem"}}>
             <div className="site-logo">
                 <a href="index.html">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdQSlOvTLEF-ECpJwcCsjE_PWONr-NxH0av0NrONY932eu82vXJyJ4rK-yEqP3n-xRsSw&usqp=CAU" alt="" className="img-fluid" style={{"width":"5rem","height":"5rem"}}
                      />
                 </a>
+               
             </div>
+         <center>   <ul className="primary-menu">
+
+                 
+                    
+<li>
+<StyledFirebaseAuth
+uiConfig={uiConfig}
+firebaseAuth={firebase.auth()}
+/>
+
+</li>
+</ul></center>
 
             <div className="offcanvas-icon d-block d-lg-none">
-                <a href="#" className="nav-toggler"><i className="fal fa-bars"></i></a> 
+            {/* <li>
+                    <StyledFirebaseAuth
+                    uiConfig={uiConfig}
+                    firebaseAuth={firebase.auth()}
+                  />
+            
+            </li> */}
             </div>
 
-            <div className="header-category-menu d-none d-xl-block">
+            {/* <div className="header-category-menu d-none d-xl-block">
                 <ul>
                     <li className="has-submenu">
                         <a href="https://bmsce.ac.in/home/Information-Science-and-Engineering-Faculty">BMSCE-ISE</a>
                         
                     </li>
                 </ul>
-            </div>
+            </div> */}
 
 
             <nav className="site-navbar ms-auto">
 
-                <ul className="primary-menu">
+                {/* <ul className="primary-menu">
 
                     <li>
                     <StyledFirebaseAuth
                     uiConfig={uiConfig}
                     firebaseAuth={firebase.auth()}
                   />
+            
                     </li>
-                </ul>
-
-                <a href="#" className="nav-close"><i className="fal fa-times"></i></a>
+                </ul> */}
             </nav>
         </div>
     </div>
@@ -200,7 +218,7 @@ export default function LandingPage() {
                     </div>
                     <div className="course-cat-content">
                         <h4 className="course-cat-title">
-                            <a href="#">Cloud Computing And  Many more!!</a>
+                            <a href="#"> And  Many more!!</a>
                         </h4>
                     </div>
                 </div>
@@ -299,62 +317,27 @@ export default function LandingPage() {
     </div>
 </section>
 
-<section className="footer footer-3 pt-250">
-	<div className="footer-mid">
-		<div className="container">
-			<div className="row">
-				<div className="col-xl-3 col-sm-8 me-auto">
-					<div className="widget footer-widget mb-5 mb-lg-0">
-						<div className="footer-logo">
-							<img src="https://admin.googleusercontent.com/logo-scs-key1909823" alt="" className="img-fluid" />
+<section class="footer footer-3 pt-250" style={{"margin-bottom":"0rem"}}>
+	<div class="footer-mid">
+		<div class="container" style={{"height":"4rem","overflow":"hidden","marginBottom":"0","padding":"0"}} >
+			<div class="row">
+				<div class="col-xl-3 col-sm-8 me-auto">
+					<div class="widget footer-widget mb-5 mb-lg-0">
+						<div class="footer-logo">
+							<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdQSlOvTLEF-ECpJwcCsjE_PWONr-NxH0av0NrONY932eu82vXJyJ4rK-yEqP3n-xRsSw&usqp=CAU" alt=""style={{"width":"4.25rem","height":"4.25rem"}} class="img-fluid" />
 						</div>
 						
-						<p className="mt-4">BMSCE-ISE</p>
-
-						<div className="footer-socials mt-5">
-							<span className="me-2">Connect :</span>
-							<a href="#"><i className="fab fa-facebook-f"></i></a>
-							<a href="#"><i className="fab fa-twitter"></i></a>
-							<a href="#"><i className="fab fa-linkedin-in"></i></a>
-							<a href="#"><i className="fab fa-pinterest"></i></a>
-						</div>
+						<p class="mt-4">BMSCE-ISE</p>
 					</div>
 				</div>
-
-
-				
-
-				<div className="col-m-2 col-sm-4">
-					<div className="footer-widget mb-5 mb-lg-0">
-						<h5 className="widget-title">Address</h5>
-						<ul className="list-unstyled footer-links">
-							<li><a href="#">+0800 327 8534</a></li>
-							<li><a href="#">ise@bmsce.ac.in</a></li>
-							<li><a href="#">Basavanagudi,Bengaluru</a></li>
-						</ul>
+				<div class="col-m-2 col-sm-6">
+					<div class="footer-widget mb-5 mb-lg-0">
+                    <p class="mb-0 copyright  " style={{"color":"black"}}>© 2022 rights reserved by <a href="" rel="nofollow">Ciie-Developers Wing</a> </p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<div className="footer-btm">
-		<div className="container">
-			<div className="row align-items-center">
-				<div className="col-xl-6 col-sm-12 col-lg-6">
-					<center><p className="mb-0 copyright text-sm-center text-lg-start">© 2021 rights reserved by <a href="" rel="nofollow">Ciie-Developers Wing</a> </p></center>
-				</div>
-
-	
-			</div>
-		</div>
-	</div>
-
-	<div className="fixed-btm-top">
-        <center>		<a href="#top-header" className="js-scroll-trigger scroll-to-top"><i className="fa fa-angle-up"></i></a>
-        </center>
-	</div>
-	
 </section>
        
         
