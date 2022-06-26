@@ -45,33 +45,24 @@ const Customerlist = () => {
     //     sun[i] = info[i].work;
     //   }
     // }
-  },[arr]);
+  },[]);
 
   const data = {
     columns: [
-      {
-        label: (
-          <div className="sorting_1 p-0 text-center">
-            <div className="custom-control custom-checkbox ml-2"></div>
-          </div>
-        ),
-      },
+      
 
-      { label: "Articles Published", field: "status", sort: "asc" },
+      { label: "Articles Published", field: "status", sort: "asc",width:"200" },
     ],
 
     rows: [
       ...arr.map((member, key) => ({
         status: (
-          <a href={user && member} className="btn bgl-light text-black btn-sm">
-            {user && member}
-          </a>
+          <center><a href={user && member} className="btn bgl-light text-black btn-sm">
+          {user && member}
+        </a></center>
         ),
       })),
     ],
-  };
-  const options = {
-    filterType: "checkbox",
   };
   return (
     <Fragment>
@@ -81,7 +72,7 @@ const Customerlist = () => {
         <div className="col-xl-12">
           <div className="table-responsive">
             <div className="display mb-4 dataTablesCard customer-list-table">
-              <MDBDataTable data={data} />
+              <MDBDataTable data={data} small searching={false}/>
             </div>
           </div>
         </div>

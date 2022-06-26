@@ -323,6 +323,7 @@ const Home = () => {
                                       width="75"
                                       src={user && res.pic}
                                       alt="img"
+                                      style={{"width":"4rem","height":"4.25rem"}}
                                     />
                                   </Link>
                                   <div className="media-body">
