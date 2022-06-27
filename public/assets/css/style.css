@@ -564,8 +564,9 @@ BUTTONS STYLE
 
 .btn-main {
   background: var(--theme-primary-color);
-  color: #fff;
+  color: #fff !important;
   border-color: var(--theme-primary-color);
+  background-color: var(--theme-secondary-color) !important;
 }
 
 .btn-main:hover {
@@ -4440,7 +4441,7 @@ Course Review
 Footer Section
 ======================*/
 .footer {
-  padding: 100px 0px 20px;
+  padding: 140px 0px 0px;
   position: relative;
   background: #000000;
 }
@@ -4503,7 +4504,7 @@ Footer Section
 }
 
 .footer-mid {
-  padding-bottom: 80px;
+  padding-bottom: 0px;
 }
 
 .footer-btm {
@@ -4512,6 +4513,9 @@ Footer Section
 }
 
 .footer-logo {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
   margin-right: 20px;
 }
 
@@ -5042,7 +5046,7 @@ Single Blog POSt
 Footer Section
 ======================*/
 .footer {
-  padding: 100px 0px 20px;
+  padding: 140px 0px 20px;
   position: relative;
   background: #000000;
 }
@@ -5105,7 +5109,7 @@ Footer Section
 }
 
 .footer-mid {
-  padding-bottom: 80px;
+  padding-bottom: 0px;
 }
 
 .footer-btm {
@@ -5202,3 +5206,8 @@ Fixed top top bottom
 }
 
 /*# sourceMappingURL=maps/style.css.map */
+
+.footer-mid.container .row{
+  display:flex;
+  flex-direction:row;
+}

@@ -117,13 +117,14 @@ const Markup = () => {
   path = path.split("/");
   path = path[path.length - 1];
   let pagePath = path.split("-").includes("page");
+  if (path==""){pagePath=true;}
   const [activeEvent, setActiveEvent] = useState(!path);
 
   const routes = [
     /// Dashboard
     // { url: "", component: Home },
     { url: "dashboard", component: Home },
-    {url:"page-landing",component:LandingPage},
+    {url:"",component:LandingPage},
     { url: "companies", component: Companies },
     { url: "analytics", component: Analytics },
     { url: "faculty-list", component: user ? Review : Frontpage },
@@ -131,7 +132,7 @@ const Markup = () => {
     { url: "order-list", component: Orderlist },
     { url: "Submissions", component: user ? Customerlist : Frontpage },
     { url: "task", component: Task },
-    { url: "", component: Frontpage },
+    // { url: "", component: Frontpage },
 
     /// Apps
     { url: "app-profile", component: AppProfile },
